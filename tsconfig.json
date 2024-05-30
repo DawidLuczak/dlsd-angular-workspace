@@ -3,6 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "dlsd-angular-ui": [
+        "./dist/dlsd-angular-ui"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
