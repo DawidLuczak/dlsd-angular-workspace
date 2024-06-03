@@ -1,0 +1,8 @@
+[Settings]
+  ID = "DLSD Angular Sandbox"
+
+[build]
+  publish = "dist/dlsd-angular-sandbox/browser"
+  command = "ng build dlsd-angular-sandbox"
+  [build.environment]
+    ANGULAR_PROJECT = "dlsd-angular-sandbox"
