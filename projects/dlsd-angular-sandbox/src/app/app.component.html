@@ -1,0 +1,5 @@
+<main>
+  @for (route of ROUTES; track route.title) {
+  <ng-container *ngComponentOutlet="route.component!"></ng-container>
+  }
+</main>

@@ -1,0 +1,13 @@
+<div class="tooltip f-regular-1">
+  @if ((config.position$ | async); as positions) {
+  <span
+    class="tooltip-arrow"
+    [style.left.px]="positions.arrowX"
+    [style.bottom.px]="positions.arrowY"
+  ></span>
+  } @if (contextAsString(); as string) {
+  {{ string }}
+  } @if (contextAsTemplate(); as template) {
+  <ng-template [ngTemplateOutlet]="template"></ng-template>
+  }
+</div>
