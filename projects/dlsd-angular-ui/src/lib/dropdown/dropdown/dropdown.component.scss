@@ -1,0 +1,396 @@
+@use "colors";
+@use "variables";
+
+:host {
+  max-width: 500px;
+  z-index: variables.$z-index-dropdown;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background: colors.$grayscale-0;
+  padding: 4px;
+}
+
+.listbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  outline: none;
+
+  .enabled-options-container {
+    width: 100%;
+
+    .option-drag-indicator {
+      width: 100%;
+      height: 2px;
+      background: colors.$grayscale-9;
+    }
+  }
+
+  .option {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    background: transparent;
+    gap: 8px;
+    text-align: left;
+    outline: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 300ms ease;
+
+    &:active {
+      background: colors.$grayscale-2;
+    }
+
+    &.cdk-drag-placeholder {
+      background: colors.$grayscale-2;
+
+      .option-template {
+        .option-content {
+          span {
+            color: colors.$grayscale-4;
+          }
+        }
+      }
+    }
+
+    .option-template {
+      width: 100%;
+      display: grid;
+      grid-template-areas: "content";
+      gap: 8px;
+
+      &.option-draggable {
+        grid-template-areas: "drag-icon content";
+        grid-template-columns: 16px 1fr;
+      }
+    }
+
+    .option-content {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      grid-area: content;
+    }
+
+    .checkbox {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .option[aria-disabled="false"] {
+    &.cdk-option-active,
+    &:hover {
+      background: colors.$grayscale-1;
+    }
+
+    &:focus-visible:not(:active) {
+      border: 2px solid colors.$blue-5;
+    }
+
+    .checkbox-icon {
+      color: colors.$blue-5;
+    }
+
+    .drag-icon {
+      color: colors.$grayscale-5;
+      transform: rotate(90deg);
+      grid-area: drag-icon;
+    }
+  }
+
+  .option[aria-disabled="true"] {
+    color: colors.$grayscale-5;
+    cursor: default;
+  }
+
+  .hr {
+    width: 100%;
+    height: 1px;
+    background: colors.$grayscale-2;
+    margin: 4px 0;
+  }
+
+  .add-button {
+    width: 100%;
+    padding: 8px;
+    text-align: left;
+    background: colors.$grayscale-0;
+    color: colors.$blue-5;
+    cursor: pointer;
+    transition: background 300ms ease;
+    overflow-wrap: break-word;
+
+    &:hover {
+      background: colors.$grayscale-1;
+    }
+
+    &:focus-visible:not(:active) {
+      border: 2px solid colors.$blue-5;
+    }
+
+    &:active {
+      background: colors.$grayscale-2;
+    }
+
+    &.cdk-option-active {
+      background: colors.$grayscale-1;
+    }
+  }
+}
+
+.listbox[aria-multiselectable="true"] {
+  .option {
+    .option-content,
+    &.select-all {
+      flex-direction: row-reverse;
+      justify-content: left;
+      gap: 8px;
+    }
+
+    &.cdk-drag-placeholder {
+      background: colors.$grayscale-2;
+
+      .option-template {
+        .option-content {
+          .checkbox {
+            background: colors.$grayscale-3;
+
+            .checkbox-icon {
+              color: colors.$grayscale-5;
+            }
+          }
+        }
+      }
+    }
+
+    .checkbox {
+      display: inline-grid;
+      place-items: center;
+      background: colors.$grayscale-0;
+      border: 1px solid colors.$grayscale-4;
+      outline: none;
+      transition: none 300ms ease;
+      transition-property: background, border-color;
+
+      .checkbox-icon {
+        color: colors.$grayscale-0;
+      }
+    }
+  }
+
+  .option[aria-selected="true"],
+  .option.active {
+    .checkbox {
+      background: colors.$blue-5;
+      border: none;
+    }
+
+    &.option[aria-disabled="true"] {
+      .checkbox {
+        background: colors.$grayscale-3;
+
+        .checkbox-icon {
+          color: colors.$grayscale-5;
+        }
+      }
+    }
+  }
+}
+
+.listbox[aria-multiselectable="false"] {
+  .option[aria-selected="true"] {
+    background: colors.$blue-1;
+  }
+}
+
+.empty {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: colors.$grayscale-5;
+}
+
+onyx-spinner {
+  align-self: center;
+  padding: 24px;
+}
+
+.drag-option-multiple-preview,
+.drag-option-single-preview {
+  width: max-content !important;
+  display: flex;
+  position: absolute;
+  z-index: 5000 !important;
+  background: colors.$grayscale-0;
+  border: 2px solid colors.$blue-5;
+  padding: 0 8px;
+  top: -30px !important;
+
+  .option-template {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .option-content {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    span {
+      width: max-content;
+      display: flex;
+    }
+  }
+
+  .drag-icon {
+    height: max-content;
+    color: colors.$grayscale-5;
+    transform: rotate(90deg);
+  }
+}
+
+.drag-option-multiple-preview {
+  align-items: center;
+  gap: 8px;
+
+  .option-content {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .checkbox {
+    height: max-content;
+    display: inline-grid;
+    place-items: center;
+    background: colors.$grayscale-0;
+    border: 1px solid colors.$grayscale-4;
+    outline: none;
+    transition: none 300ms ease;
+    transition-property: background, border-color;
+
+    .checkbox-icon {
+      color: colors.$grayscale-0;
+    }
+  }
+
+  &.cdk-option-active {
+    .checkbox {
+      background: colors.$blue-5;
+      border: none;
+    }
+  }
+}
+
+.drag-option-single-preview {
+  width: 100%;
+  flex-direction: row;
+  justify-content: left;
+  gap: 8px;
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+  transition: background 300ms ease;
+
+  &.cdk-option-active,
+  &:hover {
+    background: colors.$grayscale-1;
+  }
+
+  &:active {
+    background: colors.$grayscale-2;
+  }
+
+  &.cdk-option-active {
+    .checkbox-icon {
+      color: colors.$blue-5;
+    }
+  }
+
+  .option-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .checkbox {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+::ng-deep .highlight {
+  background: colors.$blue-2;
+  color: colors.$blue-5;
+}
+
+:host-context(.bottom) {
+  margin-top: 8px;
+}
+
+:host-context(.top) {
+  margin-bottom: 8px;
+}
+
+:host-context(.right) {
+  margin-left: 8px;
+}
+
+:host-context(.left) {
+  margin-right: 8px;
+}
+
+:host-context(.hidden) {
+  visibility: hidden;
+}
+
+:host-context(.s) {
+  max-width: 160px;
+  max-height: 160px;
+}
+
+:host-context(.m) {
+  max-width: 240px;
+  max-height: 240px;
+}
+
+:host-context(.l) {
+  max-width: 320px;
+  max-height: 240px;
+}
+
+:host-context(.fill) {
+  max-width: unset;
+}
+
+:host-context(.dark) {
+  background: colors.$grayscale-7;
+
+  .listbox {
+    .option {
+      color: colors.$grayscale-0;
+
+      &.cdk-option-active,
+      &:hover {
+        background: colors.$grayscale-6;
+      }
+
+      &:active {
+        background: colors.$grayscale-5;
+      }
+    }
+  }
+}
+
+::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dropdown-backdrop {
+  height: 100%;
+  background: colors.$grayscale-5 !important;
+  opacity: 0.5;
+}

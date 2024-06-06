@@ -1,1 +1,1 @@
-export * from './lib/tooltip/index';
+export * from './lib/index';

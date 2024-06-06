@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dropdown {
+  border: 1px solid black;
+  box-shadow: 0 0 0 3px gray;
+  padding: 4px 8px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(gray, 0.2);
+  }
+}

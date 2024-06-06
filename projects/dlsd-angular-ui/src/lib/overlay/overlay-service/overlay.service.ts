@@ -8,6 +8,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ComponentRef,
+  ElementRef,
   Injectable,
   InjectionToken,
   Injector,
@@ -29,6 +30,11 @@ export class OverlayService {
   private _componentRef = signal<ComponentRef<unknown> | undefined>(undefined);
   public get componentRef() {
     return this._componentRef.asReadonly();
+  }
+
+  private _sourceRef = signal<ElementRef | undefined>(undefined);
+  public get sourceRef() {
+    return this._sourceRef.asReadonly();
   }
 
   private _detach$ = new Subject<void>();
@@ -83,6 +89,14 @@ export class OverlayService {
     return this.overlay.create(overlayConfig);
   }
 
+  public createAndSetOverlayRef(
+    overlayConfig?: OverlayConfig,
+    sourceRef?: ElementRef
+  ): void {
+    this._overlayRef.set(this.createOverlayRef(overlayConfig));
+    this._sourceRef.set(sourceRef);
+  }
+
   public detachFromOverlay(): void {
     this._detach$.next();
     this._overlayRef()?.detach();
@@ -109,9 +123,5 @@ export class OverlayService {
 
   public removePanelClass(className: string): void {
     return this.overlayRef()?.removePanelClass(className);
-  }
-
-  public createAndSetOverlayRef(overlayConfig?: OverlayConfig): void {
-    this._overlayRef.set(this.createOverlayRef(overlayConfig));
   }
 }

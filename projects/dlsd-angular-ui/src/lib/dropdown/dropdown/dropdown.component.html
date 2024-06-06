@@ -1,0 +1,137 @@
+<!-- @if (config.headerTemplateRef) {
+<ng-container
+  *ngTemplateOutlet="
+    config.headerTemplateRef;
+    context: {
+      $implicit: config.title
+    }
+  "
+></ng-container>
+}  -->
+@if (options()) {
+<ul
+  class="listbox"
+  cdkListbox
+  cdkListboxNavigationWrapDisabled
+  cdkListboxUseActiveDescendant
+  [cdkListboxMultiple]="config.multiple"
+  [cdkListboxValue]="value()"
+  (cdkListboxValueChange)="changeOptions($event)"
+>
+  @if (options()?.length) { @if (config.multiple) {
+  <button
+    class="option select-all f-regular-1"
+    [ngClass]="{ active: selectedAll() }"
+    [cdkOption]="null"
+    #listboxOptionRef
+  >
+    <span>Select all</span>
+
+    <div class="checkbox" [ngClass]="{ selectedAll: selectedAll() }"></div>
+  </button>
+
+  <div class="hr"></div>
+  } @for (optionsGroup of optionsSortedDisabledFirst(); track optionsGroup) {
+  @if (optionsGroup.headerTemplateRef; as headerTemplateRef) {
+  <ng-container *ngTemplateOutlet="headerTemplateRef"></ng-container>
+  } @for (option of optionsGroup.options.disabled; track option.value) {
+  <button
+    class="option f-regular-1"
+    [cdkOption]="option"
+    [cdkOptionDisabled]="option.disabled"
+    (click)="unselectOption(option)"
+    #listboxOptionRef
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        config.optionTemplateRef ?? optionTemplateRef;
+        context: {
+          $implicit: option,
+          query: query()
+        }
+      "
+    ></ng-container>
+  </button>
+  }
+
+  <div
+    class="enabled-options-container"
+    cdkDropList
+    cdkDropListOrientation="vertical"
+    [cdkDropListSortingDisabled]="true"
+    [cdkDropListDisabled]="!config.optionsDraggable"
+    #enabledOptionsContainerRef
+  >
+    @for (option of optionsGroup.options.enabled; track option.value) { @if
+    (optionDragIndicator() === $index) {
+    <div class="option-drag-indicator"></div>
+    }
+
+    <button
+      class="option f-regular-1"
+      cdkDrag
+      [cdkDragPreviewClass]="
+        config.multiple
+          ? 'drag-option-multiple-preview'
+          : 'drag-option-single-preview'
+      "
+      (cdkDragMoved)="moveDragOption($event, $index)"
+      (cdkDragDropped)="dropDragOption($event, optionsGroup.options, $index)"
+      [cdkOption]="option"
+      [cdkOptionDisabled]="option.disabled"
+      (click)="unselectOption(option)"
+      #listboxOptionRef
+    >
+      <ng-container
+        *ngTemplateOutlet="
+          config.optionTemplateRef ?? optionTemplateRef;
+          context: {
+            $implicit: option,
+            query: query()
+          }
+        "
+      ></ng-container>
+    </button>
+    } @if ( optionDragIndicator() && optionDragIndicator()! >=
+    optionsGroup.options.enabled.length ) {
+    <div class="option-drag-indicator"></div>
+    }
+  </div>
+  }
+  <!-- @if (config.footerOption) { @if (optionRefs().length > 1) {
+  <div class="hr"></div>
+  }
+
+  <button
+    class="option f-regular-1"
+    [cdkOption]="config.footerOption"
+    #listboxOptionRef
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        config.footerTemplateRef ?? optionTemplateRef;
+        context: {
+          $implicit: config.footerOption
+        }
+      "
+    ></ng-container>
+  </button>
+  }  -->
+  } @else {
+  <div class="empty f-italic">Brak wyników</div>
+  }
+</ul>
+}
+
+<ng-template #optionTemplateRef let-option let-query="query">
+  <div
+    class="option-template"
+    [ngClass]="{ 'option-draggable': config.optionsDraggable }"
+  >
+    <div class="option-content">
+      <span [innerHTML]="option.name | dlsdHighlight : query"></span>
+
+      <div class="checkbox" [ngClass]="{ selected: option.selected }"></div>
+    </div>
+  </div>
+</ng-template>
