@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TooltipDirective } from '../../../../dlsd-angular-ui/src/lib/tooltip';
 
 @Component({
@@ -7,5 +7,6 @@ import { TooltipDirective } from '../../../../dlsd-angular-ui/src/lib/tooltip';
   imports: [TooltipDirective],
   templateUrl: './tooltips.component.html',
   styleUrl: './tooltips.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipsComponent {}
