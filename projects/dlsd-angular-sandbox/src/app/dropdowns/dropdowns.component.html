@@ -1,0 +1,17 @@
+<h2>Dropdowns</h2>
+
+<div
+  class="dropdown"
+  [dlsdDropdownOptions]="[
+    {
+      options: [
+        { name: 'Option 1', value: 1 },
+        { name: 'Option 2', value: 2 },
+        { name: 'Option 3', value: 3 }
+      ]
+    }
+  ]"
+  (dropdownValueChange)="selectOption($event.value)"
+>
+  Show dropdown on click
+</div>

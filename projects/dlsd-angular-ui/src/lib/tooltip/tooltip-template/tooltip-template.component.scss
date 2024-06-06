@@ -1,0 +1,73 @@
+cdk-dialog-container {
+  z-index: 1000;
+  position: fixed;
+}
+
+.tooltip {
+  max-width: 500px;
+  width: max-content;
+  position: relative;
+  background: black;
+  color: white;
+  padding: 8px;
+}
+
+.tooltip-arrow {
+  position: absolute;
+}
+
+:host-context(.top) {
+  margin-bottom: 8px;
+
+  .tooltip-arrow {
+    top: 100% !important;
+    border-top: 4px solid black;
+  }
+}
+
+:host-context(.right) {
+  margin-left: 8px;
+
+  .tooltip-arrow {
+    right: 100% !important;
+    border-right: 4px solid black;
+  }
+}
+
+:host-context(.bottom) {
+  margin-top: 8px;
+
+  .tooltip-arrow {
+    bottom: 100% !important;
+    border-bottom: 4px solid black;
+  }
+}
+
+:host-context(.left) {
+  margin-right: 8px;
+
+  .tooltip-arrow {
+    left: 100% !important;
+    border-left: 4px solid black;
+  }
+}
+
+:host-context(.top),
+:host-context(.bottom) {
+  .tooltip-arrow {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+}
+
+:host-context(.right),
+:host-context(.left) {
+  .tooltip-arrow {
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+  }
+}
+
+:host-context(.middle) {
+  transform: translateY(25%);
+}

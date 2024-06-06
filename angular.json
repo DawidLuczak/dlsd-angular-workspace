@@ -70,6 +70,11 @@
                 "input": "projects/dlsd-angular-sandbox/public"
               }
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/dlsd-angular-ui/src/styles"
+              ]
+            },
             "styles": [
               "projects/dlsd-angular-sandbox/src/styles.scss"
             ],
