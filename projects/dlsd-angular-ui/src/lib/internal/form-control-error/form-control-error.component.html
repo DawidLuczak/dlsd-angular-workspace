@@ -1,0 +1,5 @@
+@if (error; as error) {
+<p class="error f-label-2 {{ size() }}">
+  {{ I18N + error.code | translate : { value: error.value } }}
+</p>
+}
