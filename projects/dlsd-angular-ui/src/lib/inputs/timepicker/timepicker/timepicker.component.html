@@ -1,0 +1,33 @@
+@if (label(); as label) {
+<dlsd-input-label
+  [label]="label"
+  [hint]="hint()"
+  [required]="isRequired"
+  [disabled]="disabled()"
+  (click)="inputTimeFromRef.focus()"
+></dlsd-input-label>
+}
+
+<dlsd-timepicker-input
+  [value]="value().from"
+  [control]="formControl"
+  [disabled]="disabled()"
+  [invalid]="isInvalid"
+  (changeValue)="changeValue({ from: $event })"
+  (focusout)="focusoutOnTouched(inputTimeFromRef)"
+  #inputTimeFromRef
+></dlsd-timepicker-input>
+
+@if (withTimeRange()) {
+<div class="separator">-</div>
+
+<dlsd-timepicker-input
+  [value]="value().to"
+  [control]="formControl"
+  [disabled]="disabled()"
+  [invalid]="isInvalid"
+  (changeValue)="changeValue({ to: $event })"
+  (focusout)="focusoutOnTouched(inputTimeFromRef)"
+  #inputTimeToRef
+></dlsd-timepicker-input>
+}

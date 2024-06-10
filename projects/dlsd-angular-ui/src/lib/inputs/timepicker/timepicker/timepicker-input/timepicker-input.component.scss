@@ -1,0 +1,103 @@
+@use "colors";
+
+:host {
+  width: min-content;
+}
+
+.input {
+  height: 40px;
+  display: grid;
+  grid-template-areas: "hour separator minute clear clock";
+  grid-template-columns: 16px 4px 16px 1fr 16px;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid colors.$grayscale-3;
+  padding: 0 12px;
+  cursor: text;
+  transition: none 300ms ease;
+  transition-property: background, border-color, box-shadow, color;
+
+  &:not(.disabled) {
+    &:hover {
+      border: 1px solid colors.$grayscale-4;
+    }
+
+    &:focus-within {
+      border: 1px solid colors.$blue-5;
+      box-shadow: 0 0 0 3px rgba(colors.$blue-5, 0.25);
+    }
+
+    &.active {
+      border: 1px solid colors.$grayscale-4;
+
+      &:hover {
+        background: colors.$grayscale-1;
+      }
+    }
+
+    &.invalid {
+      border-color: colors.$red-1;
+
+      &:hover {
+        background: rgba(colors.$red-1, 0.2);
+      }
+    }
+  }
+
+  &.disabled {
+    background: colors.$grayscale-1;
+    border-color: colors.$grayscale-1;
+
+    input {
+      color: colors.$grayscale-4;
+    }
+
+    .clock-icon {
+      color: colors.$grayscale-4;
+    }
+  }
+
+  input {
+    max-width: 16px;
+    background: transparent;
+    color: colors.$grayscale-9;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      color: colors.$grayscale-4;
+    }
+
+    &.hour {
+      grid-area: hour;
+    }
+
+    &.minute {
+      grid-area: minute;
+    }
+  }
+
+  &.active {
+    .clock-icon {
+      width: unset;
+    }
+  }
+
+  .separator {
+    width: 4px;
+    grid-area: separator;
+    text-align: center;
+    user-select: none;
+  }
+
+  .clear {
+    justify-self: right;
+    grid-area: clear;
+    margin-right: 4px;
+  }
+
+  .clock-icon {
+    justify-self: center;
+    grid-area: clock;
+  }
+}
