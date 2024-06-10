@@ -1,0 +1,111 @@
+@use "colors";
+@use "mixins";
+
+@mixin button-variant($background, $hover, $active) {
+  background: $background;
+
+  &:focus-visible {
+    @include mixins.focus-outline();
+  }
+
+  &:hover {
+    background: $hover;
+  }
+
+  &:active {
+    background: $active;
+  }
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: none 300ms ease;
+  transition-property: background, color, border-color, box-shadow;
+
+  /* Colors */
+  &.blue {
+    @include button-variant(
+      colors.$blue-700,
+      colors.$blue-500,
+      colors.$blue-900
+    );
+
+    &.spinner {
+      background: colors.$blue-500;
+      pointer-events: none;
+    }
+  }
+  &.green {
+    @include button-variant(
+      colors.$green-600,
+      colors.$green-500,
+      colors.$green-700
+    );
+  }
+  &.red {
+    @include button-variant(colors.$red-500, colors.$red-400, colors.$red-600);
+  }
+
+  /* Sizes */
+  &.s {
+    height: 32px;
+    padding: 8px;
+
+    &.spinner {
+      min-width: 57px;
+    }
+  }
+  &.m {
+    height: 40px;
+    padding: 12px;
+
+    &.spinner {
+      min-width: 65px;
+    }
+  }
+
+  /* Types */
+  &.primary {
+    color: colors.$grayscale-0;
+    border: transparent;
+  }
+  &.outline {
+    color: colors.$grayscale-900;
+    background: transparent;
+    border: 1px solid colors.$blue-700;
+
+    &:focus-visible {
+      @include mixins.focus-outline(3);
+      background: colors.$blue-700;
+      color: colors.$grayscale-0;
+      border-color: colors.$blue-700;
+    }
+
+    &:hover {
+      background: colors.$blue-700;
+      color: colors.$grayscale-0;
+    }
+
+    &:active {
+      background: colors.$blue-800;
+      color: colors.$grayscale-0;
+      border-color: colors.$blue-800;
+    }
+
+    &.spinner {
+      background: colors.$blue-700;
+    }
+  }
+
+  /* Disabled */
+  &:disabled {
+    background: colors.$grayscale-300;
+    color: colors.$grayscale-500;
+    border-color: transparent;
+    pointer-events: none;
+  }
+}
