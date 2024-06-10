@@ -28,26 +28,22 @@
 
   /* Colors */
   &.blue {
-    @include button-variant(
-      colors.$blue-700,
-      colors.$blue-500,
-      colors.$blue-900
-    );
+    @include button-variant(colors.$blue-4, colors.$blue-3, colors.$blue-5);
 
     &.spinner {
-      background: colors.$blue-500;
+      background: colors.$blue-3;
       pointer-events: none;
     }
   }
-  &.green {
-    @include button-variant(
-      colors.$green-600,
-      colors.$green-500,
-      colors.$green-700
-    );
-  }
+  // &.green {
+  //   @include button-variant(
+  //     colors.$green-600,
+  //     colors.$green-500,
+  //     colors.$green-700
+  //   );
+  // }
   &.red {
-    @include button-variant(colors.$red-500, colors.$red-400, colors.$red-600);
+    @include button-variant(colors.$red-1, colors.$red-1, colors.$red-1);
   }
 
   /* Sizes */
@@ -74,37 +70,37 @@
     border: transparent;
   }
   &.outline {
-    color: colors.$grayscale-900;
+    color: colors.$grayscale-9;
     background: transparent;
-    border: 1px solid colors.$blue-700;
+    border: 1px solid colors.$blue-4;
 
     &:focus-visible {
       @include mixins.focus-outline(3);
-      background: colors.$blue-700;
+      background: colors.$blue-4;
       color: colors.$grayscale-0;
-      border-color: colors.$blue-700;
+      border-color: colors.$blue-4;
     }
 
     &:hover {
-      background: colors.$blue-700;
+      background: colors.$blue-4;
       color: colors.$grayscale-0;
     }
 
     &:active {
-      background: colors.$blue-800;
+      background: colors.$blue-5;
       color: colors.$grayscale-0;
-      border-color: colors.$blue-800;
+      border-color: colors.$blue-5;
     }
 
     &.spinner {
-      background: colors.$blue-700;
+      background: colors.$blue-4;
     }
   }
 
   /* Disabled */
   &:disabled {
-    background: colors.$grayscale-300;
-    color: colors.$grayscale-500;
+    background: colors.$grayscale-3;
+    color: colors.$grayscale-5;
     border-color: transparent;
     pointer-events: none;
   }
