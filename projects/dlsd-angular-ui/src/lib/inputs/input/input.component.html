@@ -1,0 +1,48 @@
+<div class="input">
+  @if (label(); as label) {
+  <dlsd-input-label
+    [disabled]="disabled()"
+    [required]="isRequired"
+    [label]="label"
+    [hint]="hint() || maxLengthHint()"
+    (click)="focus()"
+  ></dlsd-input-label>
+  }
+
+  <div class="container">
+    <input
+      class="{{ size() }}"
+      [ngClass]="{ invalid: isInvalid, active: value }"
+      [type]="computedType()"
+      [disabled]="disabled()"
+      [attr.autocomplete]="autocomplete()"
+      [attr.placeholder]="placeholder()"
+      (keypress)="validateInput($event)"
+      (paste)="validatePaste($event)"
+      (input)="handleValueChange($event)"
+      (focusout)="onTouched?.()"
+      #inputRef
+    />
+
+    @if (showPassword() != null) {
+    <button
+      class="visibility-button"
+      type="button"
+      [disabled]="disabled()"
+      tabindex="-1"
+      (click)="switchShowPassword()"
+    ></button>
+    } @if (value && !disabled()) {
+    <dlsd-clear-button (click)="clearInput()"></dlsd-clear-button>
+    } @if (unit()) {
+    <p class="unit">{{ unit() }}</p>
+    }
+  </div>
+</div>
+
+@if (formControl && showErrors()) {
+<dlsd-form-control-error
+  [formControls]="[formControl]"
+  [size]="size()"
+></dlsd-form-control-error>
+}
