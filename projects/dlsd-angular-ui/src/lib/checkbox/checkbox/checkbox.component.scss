@@ -1,0 +1,86 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  width: fit-content;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+
+  &:not(:has(.disabled)) {
+    cursor: pointer;
+
+    &:hover {
+      .checkbox {
+        border-color: colors.$grayscale-5;
+
+        &.active {
+          background: colors.$blue-5;
+        }
+
+        &.invalid {
+          background: rgba(colors.$red-1, 0.2);
+          border-color: colors.$red-1;
+        }
+      }
+    }
+  }
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  display: inline-grid;
+  place-items: center;
+  background: colors.$grayscale-0;
+  border: 1px solid colors.$grayscale-4;
+  outline: none;
+  transition: none 300ms ease;
+  transition-property: background, border-color;
+
+  &:focus-visible {
+    @include mixins.focus-outline(3);
+
+    &.invalid {
+      background: rgba(colors.$red-1, 0.2);
+    }
+  }
+
+  &.invalid {
+    border-color: colors.$red-1;
+  }
+
+  &.active {
+    background: colors.$blue-5;
+    border: none;
+
+    &:focus-visible {
+      @include mixins.focus-outline();
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+    border-color: colors.$grayscale-3;
+    background: colors.$grayscale-1;
+
+    &.active {
+      background: colors.$grayscale-3;
+
+      .check {
+        color: colors.$grayscale-5;
+      }
+    }
+  }
+
+  .check {
+    width: 6px;
+    height: 11px;
+    border-right: 2px solid colors.$grayscale-0;
+    border-bottom: 2px solid colors.$grayscale-0;
+    transform: rotate(30deg);
+  }
+}

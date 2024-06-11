@@ -1,0 +1,19 @@
+<div
+  class="checkbox"
+  [ngClass]="{ active: value(), disabled: disabled(), invalid: isInvalid }"
+  [tabindex]="disabled() ? -1 : 0"
+  (focusout)="onTouched?.()"
+>
+  @if (value()) {
+  <div class="check"></div>
+  }
+</div>
+
+@if (label(); as label) {
+<dlsd-input-label
+  type="title"
+  [label]="label"
+  [required]="isRequired"
+  [disabled]="disabled()"
+></dlsd-input-label>
+}
