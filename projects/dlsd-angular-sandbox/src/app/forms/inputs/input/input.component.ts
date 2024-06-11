@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DLSDInputComponent } from '../../../../../dlsd-angular-ui/src/lib/inputs';
+import { DLSDInputComponent } from '../../../../../../dlsd-angular-ui/src/lib/inputs';
 
 @Component({
   selector: 'app-input',

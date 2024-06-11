@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DLSDDatepickerComponent } from '../../../../../dlsd-angular-ui/src/lib/inputs';
+import { DLSDDatepickerComponent } from '../../../../../../dlsd-angular-ui/src/lib/inputs';
 
 @Component({
   selector: 'app-datepicker',

@@ -11,8 +11,9 @@ import {
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgLetModule } from 'ng-let';
-import { DLSDButtonComponent } from '../../../../buttons';
-import { I18N_NAMESPACE } from '../../../../internal/constants';
+
+import { DLSDButtonComponent } from '../../../../../buttons';
+import { I18N_NAMESPACE } from '../../../../../internal/constants';
 import { MONTH_NAMES } from '../../constants';
 import { CalendarRole, CalendarView } from '../../enums';
 import { getDate } from '../../helpers';
