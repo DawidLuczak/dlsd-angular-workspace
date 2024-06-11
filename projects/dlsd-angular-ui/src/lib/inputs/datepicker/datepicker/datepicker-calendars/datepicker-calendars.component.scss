@@ -1,0 +1,139 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  background: colors.$grayscale-0;
+  box-shadow: 0 1px 1px rgba(colors.$grayscale-9, 0.1),
+    0 3px 3px rgba(colors.$grayscale-9, 0.15);
+}
+
+.relative-days {
+  min-width: 95px;
+  display: flex;
+  flex-direction: column;
+  grid-row: 1 / -1;
+  grid-column: 1;
+  padding: 8px 4px;
+  border-right: 1px solid colors.$grayscale-2;
+
+  .relative-day {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background: colors.$grayscale-0;
+    color: colors.$grayscale-9;
+
+    &:hover {
+      background: colors.$grayscale-1;
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      border: 2px solid colors.$blue-5;
+    }
+  }
+}
+
+.date-range {
+  .headbar {
+    display: grid;
+    grid-template-columns: auto auto;
+    border-bottom: 1px solid colors.$grayscale-2;
+  }
+
+  .calendars {
+    onyx-datepicker-calendar {
+      padding: 8px 12px 12px 12px;
+
+      &:nth-child(2) {
+        border-left: 1px solid colors.$grayscale-2;
+      }
+    }
+  }
+}
+
+.headbar {
+  width: 100%;
+}
+
+.calendars {
+  display: grid;
+  grid-template-columns: auto auto;
+
+  onyx-datepicker-calendar {
+    padding-bottom: 12px;
+  }
+}
+
+.bottom-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  grid-row: 2;
+
+  &.separator {
+    border-top: 1px solid colors.$grayscale-2;
+  }
+
+  .clear-button {
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.view-months,
+.view-years {
+  width: 248px;
+  height: 272px;
+  padding: 0 4px;
+  overflow-y: scroll;
+  grid-row: 2;
+
+  .list-item {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    background: colors.$grayscale-0;
+    border-color: colors.$grayscale-0;
+    outline: none;
+    cursor: pointer;
+    transition: none 300ms ease;
+    transition-property: background, color, border-color;
+
+    &.active {
+      background: colors.$grayscale-1;
+
+      onyx-icon {
+        color: colors.$blue-5;
+      }
+    }
+
+    &:hover {
+      background: colors.$grayscale-1;
+    }
+
+    &:focus-visible {
+      border: 2px solid colors.$blue-5;
+    }
+  }
+}
+
+:host-context(.hidden) {
+  visibility: hidden;
+}
+
+:host-context(.bottom) {
+  margin-top: 8px;
+}
+
+:host-context(.top) {
+  margin-bottom: 8px;
+}

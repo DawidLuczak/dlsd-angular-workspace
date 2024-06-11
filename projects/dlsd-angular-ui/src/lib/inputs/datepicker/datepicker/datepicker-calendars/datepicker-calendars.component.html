@@ -1,0 +1,92 @@
+@if (config.showRelativeDays) {
+<div class="relative-days">
+  <button class="relative-day f-regular-1" (click)="setRelativeDate(0)">
+    {{ I18N + ".today" | translate }}
+  </button>
+  <button class="relative-day f-regular-1" (click)="setRelativeDate(1)">
+    {{ I18N + ".tomorrow" | translate }}
+  </button>
+  <button class="relative-day f-regular-1" (click)="setRelativeDate(2)">
+    {{ I18N + ".dayAfterTomorrow" | translate }}
+  </button>
+</div>
+}
+
+<ng-container *ngLet="view() as view">
+  <div
+    *ngLet="calendars() as calendars"
+    [ngClass]="{ 'date-range': config.withDateRange }"
+  >
+    <div class="headbar">
+      <dlsd-datepicker-calendar-headbar
+        [date]="calendars.from[0]"
+        [view]="view"
+        [allowOpenChange]="!config.withDateRange"
+        [calendarRole]="CalendarRole.FROM"
+        (viewChange)="changeView($event)"
+        (changeMonth)="changeCalendarMonth($event)"
+      ></dlsd-datepicker-calendar-headbar>
+
+      @if (config.withDateRange) {
+      <dlsd-datepicker-calendar-headbar
+        [date]="calendars.to[0]"
+        [view]="view"
+        [allowOpenChange]="false"
+        [calendarRole]="CalendarRole.TO"
+        (viewChange)="changeView($event)"
+        (changeMonth)="changeCalendarMonth($event)"
+      ></dlsd-datepicker-calendar-headbar>
+      }
+    </div>
+
+    <div *ngLet="date() as date" class="calendars">
+      @if (view === CalendarView.CALENDAR) {
+      <dlsd-datepicker-calendar
+        [calendar]="calendars.from"
+        [dateRange]="date"
+        [today]="today()"
+        [disableDate]="disableDate()"
+        (changeDate)="setDates(date, $event)"
+      ></dlsd-datepicker-calendar>
+      } @if (config.withDateRange) {
+      <dlsd-datepicker-calendar
+        [calendar]="calendars.to"
+        [dateRange]="date"
+        [today]="today()"
+        [disableDate]="disableDate()"
+        (changeDate)="setDateRange(date, $event)"
+      ></dlsd-datepicker-calendar>
+      }
+    </div>
+  </div>
+
+  @if (view === CalendarView.MONTHS) {
+  <div class="view-months" *ngLet="calendars() as calendars">
+    @for (month of MONTH_NAMES; track month) {
+    <button
+      *ngLet="calendars.from[0].getMonth() === $index as active"
+      class="list-item"
+      [ngClass]="{ active: calendars.from[0].getMonth() === $index }"
+      (click)="selectCalendarMonth($index)"
+    >
+      <p class="f-regular-1">
+        {{ I18N + ".months." + month | translate }}
+      </p>
+    </button>
+    }
+  </div>
+  } @else if (view === CalendarView.YEARS) {
+  <div class="view-years" *ngLet="calendars() as calendars">
+    @for (year of yearsRange(); track year) {
+    <button
+      *ngLet="calendars.from[0].getFullYear() === year as active"
+      class="list-item"
+      [ngClass]="{ active }"
+      (click)="selectCalendarYear(year)"
+    >
+      <p class="f-regular-1">{{ year }}</p>
+    </button>
+    }
+  </div>
+  }
+</ng-container>

@@ -1,0 +1,60 @@
+<div
+  *ngLet="date() as date"
+  class="datepicker-input"
+  [ngClass]="{ active: date.year, disabled: disabled(), invalid: invalid() }"
+  #inputRef
+>
+  <div *ngLet="disabled() as disabled" class="input-date f-regular-1">
+    <input
+      class="day"
+      type="text"
+      placeholder="DD"
+      [disabled]="disabled"
+      (keypress)="validateInput($event)"
+      (input)="changeDay($event)"
+      (paste)="pasteDate($event)"
+    />
+
+    <span class="input-date-separator">/</span>
+
+    <input
+      class="month"
+      [ngClass]="{ value: date.month }"
+      placeholder="MM"
+      [disabled]="disabled"
+      [tabIndex]="date.day ? 0 : -1"
+      (keypress)="validateInput($event)"
+      (input)="changeMonth($event)"
+      (paste)="pasteDate($event)"
+      (focus)="focus(date.day, 0)"
+      (keydown.backspace)="previousInput($event)"
+    />
+
+    <span class="input-date-separator">/</span>
+
+    <input
+      class="year"
+      placeholder="RRRR"
+      [maxLength]="4"
+      [disabled]="disabled"
+      [tabIndex]="date.month ? 0 : -1"
+      (keypress)="validateInput($event)"
+      (input)="changeYear($event)"
+      (paste)="pasteDate($event)"
+      (focus)="focus(date.month, 2)"
+      (keydown.backspace)="previousInput($event)"
+    />
+  </div>
+
+  @if (date.day && !disabled()) {
+  <dlsd-clear-button
+    (click)="$event.stopPropagation(); clearValue()"
+  ></dlsd-clear-button>
+  }
+</div>
+
+@if (control(); as formControl) {
+<dlsd-form-control-error
+  [formControls]="[formControl]"
+></dlsd-form-control-error>
+}

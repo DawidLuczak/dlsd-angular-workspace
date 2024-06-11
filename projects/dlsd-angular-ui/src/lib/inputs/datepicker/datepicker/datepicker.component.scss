@@ -1,0 +1,30 @@
+@use "colors";
+
+:host {
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+dlsd-input-label {
+  width: max-content;
+  margin-bottom: 8px;
+}
+
+.inputs {
+  display: flex;
+
+  dlsd-datepicker-input {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .separator {
+    min-width: 16px;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    color: colors.$grayscale-9;
+  }
+}
