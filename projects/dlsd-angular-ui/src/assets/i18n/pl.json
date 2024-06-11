@@ -1,0 +1,29 @@
+{
+  "dlsdAngularUi": {
+    "datepicker": {
+      "days": {
+        "mon": "pn",
+        "tue": "wt",
+        "wed": "śr",
+        "thu": "cz",
+        "fri": "pt",
+        "sat": "sb",
+        "sun": "nd"
+      },
+      "months": {
+        "jan": "styczeń",
+        "feb": "luty",
+        "mar": "marzec",
+        "apr": "kwiecień",
+        "may": "maj",
+        "jun": "czerwiec",
+        "jul": "lipiec",
+        "aug": "sierpień",
+        "sep": "wrzesień",
+        "oct": "październik",
+        "nov": "listopad",
+        "dec": "grudzień"
+      }
+    }
+  }
+}

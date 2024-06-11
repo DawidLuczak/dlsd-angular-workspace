@@ -67,8 +67,10 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/dlsd-angular-sandbox/public"
-              }
+                "input": "projects/dlsd-angular-ui/src/assets",
+                "output": "assets"
+              },
+              "projects/dlsd-angular-sandbox/src/assets"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -131,8 +133,10 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/dlsd-angular-sandbox/public"
-              }
+                "input": "projects/dlsd-angular-ui/src/assets",
+                "output": "assets"
+              },
+              "projects/dlsd-angular-sandbox/src/assets"
             ],
             "styles": [
               "projects/dlsd-angular-sandbox/src/styles.scss"

@@ -1,0 +1,8 @@
+{
+  "name": "dlsd-angular-sandbox",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "dlsd-angular-ui": "file:../../dist/dlsd-angular-ui"
+  }
+}
