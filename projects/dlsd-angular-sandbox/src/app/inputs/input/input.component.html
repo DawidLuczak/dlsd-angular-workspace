@@ -1,3 +1,18 @@
 <h2>Input</h2>
 
-<dlsd-input label="Input label" size="s"></dlsd-input>
+<dlsd-input label="Text input" size="s" placeholder="Text..."></dlsd-input>
+
+<dlsd-input
+  label="Integer input"
+  size="s"
+  placeholder="Number..."
+  [integer]="true"
+  unit="kg"
+></dlsd-input>
+
+<dlsd-input
+  label="Disabled"
+  size="s"
+  placeholder="Disabled"
+  [disabled]="true"
+></dlsd-input>
