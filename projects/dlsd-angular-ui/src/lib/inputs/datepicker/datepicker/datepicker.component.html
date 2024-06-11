@@ -1,0 +1,42 @@
+@if (label(); as label) {
+<dlsd-input-label
+  [label]="label"
+  [hint]="hint()"
+  [disabled]="disabled()"
+  [required]="isRequired"
+  (click)="openCalendarAndFocus($event, inputFromDateRef)"
+></dlsd-input-label>
+}
+
+<div class="inputs">
+  <dlsd-datepicker-input
+    [disabled]="disabled()"
+    [invalid]="isInvalid"
+    [control]="formControl"
+    (changeValue)="changeDateFromValue($event)"
+    (clearValues)="clearValues()"
+    (click)="openCalendarAndFocus($event, inputFromDateRef)"
+    (focusin)="openCalendarAfterFocusin($event)"
+    (focusout)="focusoutCloseFromCalendar()"
+    (keydown.tab)="enableFocusout()"
+    (keydown.shift.tab)="enableFocusout()"
+    #inputFromDateRef
+  ></dlsd-datepicker-input>
+
+  @if (withDateRange()) {
+  <div class="separator f-regular-1">-</div>
+
+  <dlsd-datepicker-input
+    [disabled]="disabled()"
+    [invalid]="isInvalid"
+    [control]="formControl"
+    (changeValue)="changeDateToValue($event)"
+    (clearValues)="clearValues()"
+    (click)="openCalendarAndFocus($event, inputToDateRef)"
+    (focusin)="openCalendarAfterFocusin($event)"
+    (focusout)="focusoutCloseCalendar()"
+    (keydown.tab)="enableFocusout()"
+    #inputToDateRef
+  ></dlsd-datepicker-input>
+  }
+</div>

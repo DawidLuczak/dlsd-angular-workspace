@@ -1,0 +1,104 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(7, 32px);
+  place-items: center;
+  padding: 0 12px;
+}
+
+.weekday {
+  height: 24px;
+  text-transform: capitalize;
+}
+
+.calendar-day {
+  width: 100%;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: colors.$grayscale-0;
+  outline: none;
+  cursor: pointer;
+  transition: none 300ms ease;
+  transition-property: background, border-color, color;
+
+  &.active-range {
+    background: colors.$blue-2;
+  }
+
+  &:disabled {
+    color: colors.$grayscale-4;
+    cursor: default;
+
+    &.active {
+      background: colors.$grayscale-4;
+      color: colors.$grayscale-0;
+    }
+
+    &.today {
+      background: colors.$grayscale-2;
+    }
+  }
+
+  &:not(:disabled) {
+    &.active {
+      background: colors.$blue-4;
+      color: colors.$grayscale-0;
+
+      &:hover {
+        background: colors.$blue-3;
+        color: colors.$grayscale-0;
+      }
+
+      &:focus-visible {
+        @include mixins.focus-outline(1);
+      }
+
+      &:active {
+        background: colors.$blue-5;
+        color: colors.$grayscale-0;
+      }
+    }
+
+    &.today {
+      border: 1px solid colors.$blue-3;
+      color: colors.$grayscale-9;
+
+      &:hover {
+        background: colors.$blue-1;
+        color: colors.$grayscale-9;
+      }
+
+      &:active {
+        background: colors.$blue-2;
+        color: colors.$grayscale-9;
+      }
+
+      &.active {
+        color: colors.$grayscale-0;
+
+        &:hover {
+          color: colors.$grayscale-9;
+        }
+
+        &:active {
+          color: colors.$grayscale-9;
+        }
+      }
+    }
+
+    &:active {
+      background: colors.$grayscale-2;
+    }
+
+    &:hover {
+      background: colors.$grayscale-1;
+    }
+
+    &:focus-visible {
+      border: 2px solid colors.$blue-4;
+    }
+  }
+}

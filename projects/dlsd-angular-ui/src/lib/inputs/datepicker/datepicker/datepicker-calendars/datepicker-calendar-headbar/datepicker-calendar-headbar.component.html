@@ -1,0 +1,41 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div
+  *ngLet="allowOpenChange() as functional"
+  class="container"
+  [ngClass]="{ functional }"
+  (click)="changeView(CalendarView.CALENDAR)"
+>
+  <div class="labels" *ngLet="view() as view">
+    <div
+      class="label-button"
+      [ngClass]="{
+        active: view === CalendarView.MONTHS,
+        disabled: view === CalendarView.YEARS
+      }"
+      (click)="changeView(CalendarView.MONTHS); $event.stopPropagation()"
+    >
+      <p class="f-semibold-1">
+        {{ date() | date : "LLLL" }}
+      </p>
+    </div>
+
+    <div
+      class="label-button"
+      [ngClass]="{
+        active: view === CalendarView.YEARS,
+        disabled: view === CalendarView.MONTHS
+      }"
+      (click)="changeView(CalendarView.YEARS); $event.stopPropagation()"
+    >
+      <p class="f-semibold-1">{{ date() | date : "y" }}</p>
+    </div>
+  </div>
+
+  <!-- @if (functional) {
+    <div class="buttons">
+    </div>
+  } @else {
+
+  } -->
+</div>
