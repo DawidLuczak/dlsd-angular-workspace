@@ -1,0 +1,107 @@
+@use "colors";
+@use "mixins";
+
+@mixin button-variant($background, $hover, $active) {
+  background: $background;
+
+  &:focus-visible {
+    @include mixins.focus-outline();
+  }
+
+  &:hover {
+    background: $hover;
+  }
+
+  &:active {
+    background: $active;
+  }
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: none 300ms ease;
+  transition-property: background, color, border-color, box-shadow;
+
+  /* Colors */
+  &.blue {
+    @include button-variant(colors.$blue-4, colors.$blue-3, colors.$blue-5);
+
+    &.spinner {
+      background: colors.$blue-3;
+      pointer-events: none;
+    }
+  }
+  // &.green {
+  //   @include button-variant(
+  //     colors.$green-600,
+  //     colors.$green-500,
+  //     colors.$green-700
+  //   );
+  // }
+  &.red {
+    @include button-variant(colors.$red-1, colors.$red-1, colors.$red-1);
+  }
+
+  /* Sizes */
+  &.s {
+    height: 32px;
+    padding: 8px;
+
+    &.spinner {
+      min-width: 57px;
+    }
+  }
+  &.m {
+    height: 40px;
+    padding: 12px;
+
+    &.spinner {
+      min-width: 65px;
+    }
+  }
+
+  /* Types */
+  &.primary {
+    color: colors.$grayscale-0;
+    border: transparent;
+  }
+  &.outline {
+    color: colors.$grayscale-9;
+    background: transparent;
+    border: 1px solid colors.$blue-4;
+
+    &:focus-visible {
+      @include mixins.focus-outline(3);
+      background: colors.$blue-4;
+      color: colors.$grayscale-0;
+      border-color: colors.$blue-4;
+    }
+
+    &:hover {
+      background: colors.$blue-4;
+      color: colors.$grayscale-0;
+    }
+
+    &:active {
+      background: colors.$blue-5;
+      color: colors.$grayscale-0;
+      border-color: colors.$blue-5;
+    }
+
+    &.spinner {
+      background: colors.$blue-4;
+    }
+  }
+
+  /* Disabled */
+  &:disabled {
+    background: colors.$grayscale-3;
+    color: colors.$grayscale-5;
+    border-color: transparent;
+    pointer-events: none;
+  }
+}

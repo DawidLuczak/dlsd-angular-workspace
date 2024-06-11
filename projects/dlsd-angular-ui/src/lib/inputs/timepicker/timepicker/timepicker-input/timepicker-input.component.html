@@ -1,0 +1,57 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<div
+  class="input"
+  [ngClass]="{
+    active: value()?.minute,
+    invalid: invalid(),
+    disabled: disabled()
+  }"
+  (click)="focusInputs($event)"
+  (focusout)="focusedOut.set(true)"
+  #input
+>
+  <input
+    class="hour"
+    placeholder="00"
+    [disabled]="disabled()"
+    (input)="changeHour($event)"
+    (paste)="pasteTime($event)"
+    (keypress)="validateInput($event, 23)"
+  />
+
+  <div class="separator">:</div>
+
+  <input
+    class="minute"
+    placeholder="00"
+    [disabled]="disabled()"
+    [tabIndex]="value()?.hour ? 0 : -1"
+    (input)="changeMinute($event)"
+    (paste)="pasteTime($event)"
+    (keypress)="validateInput($event, 59)"
+    (keydown.backspace)="focusPreviousInput(value()?.minute)"
+    (focus)="focusPreviousInput(value()?.hour)"
+  />
+
+  <!-- @if ((value?.hour || value?.minute) && !disabled()) {
+    <onyx-clear-button
+      class="clear"
+      (click)="clearTimeValues(); $event.stopPropagation()"
+    ></onyx-clear-button>
+  } -->
+
+  <!-- <onyx-icon
+    class="clock-icon"
+    category="custom"
+    name="clock"
+    type="default"
+    [size]="16"
+  ></onyx-icon> -->
+</div>
+
+<!-- @if (control(); as formControl) {
+  <onyx-form-control-error
+    [formControls]="[formControl]"
+  ></onyx-form-control-error>
+} -->

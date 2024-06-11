@@ -1,0 +1,36 @@
+<ng-container *ngLet="calendar() as calendar">
+  @for (dayName of WEEK_DAY_NAMES; track dayName) {
+    <div class="weekday f-label-2">
+      {{ I18N + ".days." + dayName | translate }}
+    </div>
+  }
+
+  @if (calendar[0].getDay() > 1) {
+    <div [style.gridColumn]="'1 / ' + calendar[0].getDay()"></div>
+  } @else if (calendar[0].getDay() === 0) {
+    <div [style.gridColumn]="'1 / 7'"></div>
+  }
+
+  <ng-container *ngLet="dateRange() as dateRange">
+    @for (day of calendar; track day) {
+      <button
+        class="calendar-day f-regular-1"
+        [ngClass]="{
+          today: day.getTime() === today().getTime(),
+          active:
+            day.getTime() === dateRange.from?.getTime() ||
+            day.getTime() === dateRange.to?.getTime(),
+          'active-range':
+            dateRange.from &&
+            dateRange.to &&
+            dateRange.from.getTime() < day.getTime() &&
+            day.getTime() < dateRange.to.getTime()
+        }"
+        [disabled]="disableDate()(dateRange, day)"
+        (click)="changeDate.emit(day)"
+      >
+        {{ day.getDate() }}
+      </button>
+    }
+  </ng-container>
+</ng-container>

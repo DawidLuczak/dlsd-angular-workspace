@@ -1,0 +1,121 @@
+@use "colors";
+
+.datepicker-input {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 0 12px;
+  border: 1px solid colors.$grayscale-3;
+  transition: none 300ms ease;
+  transition-property: background, border-color, box-shadow;
+
+  .input-date {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+
+    .input-date-separator {
+      min-width: 12px;
+      display: flex;
+      justify-content: center;
+      color: colors.$grayscale-4;
+    }
+
+    input {
+      display: flex;
+      outline: none;
+      background: transparent;
+      border: none;
+
+      &.day {
+        width: 18px;
+      }
+
+      &.month {
+        width: 22px;
+
+        &.value {
+          text-align: center;
+        }
+      }
+
+      &.year {
+        width: 100%;
+      }
+
+      &::placeholder {
+        color: colors.$grayscale-4;
+      }
+    }
+  }
+
+  &.disabled {
+    background: colors.$grayscale-1;
+    border-color: colors.$grayscale-1;
+    cursor: default;
+
+    .input-date {
+      input,
+      .input-date-separator {
+        color: colors.$grayscale-5;
+      }
+    }
+
+    .calendar-button {
+      color: colors.$grayscale-5;
+      cursor: default;
+    }
+  }
+
+  &.active {
+    border-color: colors.$grayscale-4;
+
+    .input-date {
+      .input-date-separator {
+        color: colors.$grayscale-9;
+      }
+    }
+  }
+
+  &:not(.disabled) {
+    &.active {
+      border-color: colors.$grayscale-4;
+
+      &:hover {
+        background: colors.$grayscale-1;
+      }
+    }
+
+    &.invalid {
+      border-color: colors.$red-1;
+
+      &:hover {
+        border-color: colors.$red-1;
+        background: rgba(colors.$red-1, 0.2);
+      }
+    }
+
+    &:hover {
+      border-color: colors.$grayscale-4;
+    }
+
+    &:focus-within,
+    &:active {
+      border-color: colors.$blue-5;
+      box-shadow: 0px 0px 0px 3px rgba(colors.$blue-5, 0.25);
+      outline: none;
+    }
+  }
+
+  .calendar-button {
+    background: transparent;
+    color: colors.$grayscale-9;
+  }
+
+  dlsd-clear-button {
+    user-select: none;
+  }
+}

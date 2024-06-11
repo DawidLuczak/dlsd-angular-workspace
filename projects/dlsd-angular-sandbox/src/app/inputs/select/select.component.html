@@ -1,0 +1,25 @@
+<h2>Select</h2>
+
+<dlsd-select
+  label="Single select"
+  placeholder="Wybierz"
+  width="200px"
+  [options]="[{ name: 'Option 1', value: '1' }]"
+></dlsd-select>
+
+<dlsd-select
+  label="Multiple select"
+  placeholder="Wybierz"
+  width="200px"
+  [multiple]="true"
+  [options]="[{ name: 'Option 1', value: '1' }]"
+></dlsd-select>
+
+<dlsd-select
+  label="Search select"
+  placeholder="Szukaj"
+  width="200px"
+  [multiple]="true"
+  [search]="true"
+  [options]="[{ name: 'Option 1', value: '1' }]"
+></dlsd-select>

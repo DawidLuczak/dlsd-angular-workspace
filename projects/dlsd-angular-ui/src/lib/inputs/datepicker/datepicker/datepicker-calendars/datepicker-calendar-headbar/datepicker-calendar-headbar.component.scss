@@ -1,0 +1,63 @@
+@use "colors";
+
+.container {
+  height: 48px;
+  display: grid;
+  grid-template-areas: "from labels to";
+  grid-template-columns: 32px 1fr 32px;
+  justify-items: center;
+  align-items: center;
+  padding: 0 12px 0 12px;
+
+  &.functional {
+    display: flex;
+    justify-content: space-between;
+
+    &:has(.label-button.disabled) {
+      cursor: pointer;
+    }
+
+    .labels {
+      gap: 12px;
+
+      .label-button {
+        gap: 4px;
+        cursor: pointer;
+
+        &:hover {
+          color: colors.$grayscale-6;
+        }
+
+        &:focus-visible {
+          border: 2px solid colors.$blue-5;
+        }
+
+        &.disabled {
+          color: colors.$grayscale-4;
+        }
+      }
+    }
+  }
+
+  .labels {
+    display: flex;
+    gap: 2px;
+
+    &:not(.functional) {
+      grid-area: labels;
+    }
+
+    .label-button {
+      display: flex;
+      background: colors.$grayscale-0;
+      color: colors.$grayscale-9;
+      text-transform: capitalize;
+      user-select: none;
+      transition: color 300ms ease;
+    }
+  }
+
+  .buttons {
+    display: flex;
+  }
+}

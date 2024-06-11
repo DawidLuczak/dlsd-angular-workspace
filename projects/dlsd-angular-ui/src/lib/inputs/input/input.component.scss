@@ -1,0 +1,144 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.container {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  background: colors.$grayscale-0;
+  border: 1px solid colors.$grayscale-3;
+  outline: none;
+  color: colors.$grayscale-9;
+  transition: none 300ms ease;
+  transition-property: background, border-color, box-shadow;
+
+  &:hover {
+    border-color: colors.$grayscale-4;
+
+    &.invalid {
+      background: rgba(colors.$red-1, 0.2);
+    }
+
+    &.active {
+      background: colors.$grayscale-1;
+    }
+  }
+
+  &::placeholder {
+    color: colors.$grayscale-4;
+  }
+
+  &:disabled {
+    background: colors.$grayscale-1;
+    border-color: transparent;
+    pointer-events: none;
+
+    & ~ .unit {
+      color: colors.$grayscale-4;
+    }
+  }
+
+  &:focus-visible:not(:disabled),
+  &:active:not(:disabled) {
+    border-color: colors.$blue-5;
+    box-shadow: 0px 0px 0px 3px rgba(colors.$blue-5, 0.25);
+
+    &.invalid {
+      background: colors.$grayscale-0;
+    }
+  }
+
+  &.invalid {
+    border-color: colors.$red-1;
+  }
+
+  &.active:not(:disabled) {
+    border-color: colors.$grayscale-4;
+  }
+
+  &.s {
+    height: 32px;
+    padding: 4px 8px;
+
+    + dlsd-clear-button {
+      right: 4px;
+    }
+
+    ~ .unit {
+      right: 8px;
+    }
+
+    &.active ~ .unit {
+      right: 32px;
+    }
+  }
+
+  &.m {
+    height: 40px;
+    padding: 8px 12px;
+
+    &:has(~ .visibility-button) {
+      ~ dlsd-clear-button {
+        right: 36px;
+      }
+    }
+
+    ~ .visibility-button {
+      right: 8px;
+    }
+
+    ~ dlsd-clear-button {
+      right: 8px;
+    }
+
+    ~ .unit {
+      right: 12px;
+    }
+
+    &.active ~ .unit {
+      right: 40px;
+    }
+  }
+}
+
+.visibility-button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  transition: background 300ms ease;
+  cursor: pointer;
+
+  &:hover {
+    background: colors.$grayscale-1;
+  }
+}
+
+dlsd-clear-button,
+.visibility-button,
+.unit {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.unit {
+  pointer-events: none;
+}
+
+dlsd-input-label {
+  cursor: pointer;
+}

@@ -1,19 +1,10 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
+import { OverlayRef } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OverlayPosition } from '../overlay/overlay-positions';
+import { CustomOverlayConfig } from '../overlay/interfaces';
 
-export interface BaseDropdownConfig {
-  attachElementRef?: boolean;
-  hasBackdrop?: boolean;
-  hostCss: ('s' | 'm' | 'l' | 'fill' | 'dark')[];
-  positions?: OverlayPosition[];
-  overridePositions?: Partial<ConnectedPosition>;
-  targetRef?: HTMLElement;
-}
-
-export interface DropdownConfig<T> extends BaseDropdownConfig {
+export interface DropdownConfig<T> extends CustomOverlayConfig {
   clearValue?: () => void;
   close: () => void;
   // focusSourceElement?: () => void;

@@ -1,0 +1,19 @@
+@use "colors";
+
+.error {
+  width: 100%;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background: colors.$red-1;
+  color: colors.$grayscale-0;
+
+  &.s {
+    padding: 4px 8px;
+  }
+
+  &.m {
+    padding: 4px 12px;
+  }
+}

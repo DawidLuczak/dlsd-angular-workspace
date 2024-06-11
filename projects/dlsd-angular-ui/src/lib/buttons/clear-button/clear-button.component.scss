@@ -1,0 +1,24 @@
+@use "colors";
+
+button {
+  background: transparent;
+  padding: 4px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover .icon {
+    color: colors.$grayscale-5;
+    transform: rotate(90deg);
+  }
+
+  &:active .icon {
+    color: colors.$grayscale-6;
+  }
+
+  .icon {
+    color: colors.$grayscale-4;
+    border-radius: 50%;
+    transition: none 300ms ease;
+    transition-property: color, background, transform;
+  }
+}

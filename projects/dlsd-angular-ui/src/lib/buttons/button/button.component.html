@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="button {{ type() }} {{ color() }} {{ size() }} f-semibold-1"
+  [ngClass]="{ spinner: showSpinner() }"
+  [disabled]="disabled()"
+>
+  @if (showSpinner()) {
+  <dlsd-spinner color="white"></dlsd-spinner>
+  } @else {
+  <ng-content></ng-content>
+  }
+</button>

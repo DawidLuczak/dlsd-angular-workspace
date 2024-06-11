@@ -1,0 +1,25 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  width: max-content;
+}
+
+.label {
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+
+  &.title {
+    flex-direction: row-reverse;
+  }
+
+  &.disabled {
+    cursor: default;
+  }
+}
+
+.hint {
+  color: colors.$grayscale-5;
+  margin-left: auto;
+}

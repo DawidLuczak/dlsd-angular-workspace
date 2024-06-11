@@ -1,0 +1,21 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<p
+  class="label {{ type() }}"
+  [ngClass]="{
+    'f-label-2': type() === 'label',
+    'f-regular-1': type() === 'title',
+    disabled: disabled()
+  }"
+>
+  <span (click)="labelClick.emit()">{{ label() }}</span>
+
+  @if (!disabled()) {
+    @if (required()) {
+      <span>*</span>
+    }
+    @if (hint()) {
+      <span class="hint">{{ hint() }}</span>
+    }
+  }
+</p>

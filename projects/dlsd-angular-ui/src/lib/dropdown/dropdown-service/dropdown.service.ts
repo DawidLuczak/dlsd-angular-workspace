@@ -7,12 +7,10 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
+import { CustomOverlayConfig } from '../../overlay/interfaces';
 import overlayPositions from '../../overlay/overlay-positions';
 import { OverlayService } from '../../overlay/overlay-service/overlay.service';
-import {
-  BaseDropdownConfig,
-  DropdownOverlayConfig,
-} from '../dropdown-interfaces';
+import { DropdownOverlayConfig } from '../dropdown-interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +33,7 @@ export class DropdownService {
 
   constructor(private overlayService: OverlayService) {}
 
-  public attachDropdown<T extends BaseDropdownConfig, CT>(
+  public attachDropdown<T extends CustomOverlayConfig, CT>(
     sourceRef: ElementRef,
     viewContainerRef: ViewContainerRef,
     component: Type<CT>,
@@ -68,7 +66,7 @@ export class DropdownService {
     // }
   }
 
-  public attachSubDropdown<T extends BaseDropdownConfig, CT>(
+  public attachSubDropdown<T extends CustomOverlayConfig, CT>(
     sourceRef: ElementRef,
     viewContainerRef: ViewContainerRef,
     component: Type<CT>,
@@ -125,7 +123,7 @@ export class DropdownService {
 
   private createOverlayWithPositions(
     sourceRef: ElementRef,
-    config: BaseDropdownConfig
+    config: CustomOverlayConfig
   ): void {
     const positionStrategy = this.overlayService.defaultPositionStrategy(
       config.targetRef ?? sourceRef.nativeElement,

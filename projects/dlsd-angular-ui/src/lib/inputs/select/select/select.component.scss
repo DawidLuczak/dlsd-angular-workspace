@@ -1,0 +1,113 @@
+@use "colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+dlsd-input-label {
+  margin-bottom: 8px;
+}
+
+.select {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid colors.$grayscale-3;
+  box-shadow: 0px 0px 0px 0px rgba(colors.$blue-5, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition: none 300ms ease;
+  transition-property: background, border-color, box-shadow;
+
+  &.s {
+    height: 32px;
+    padding: 0 8px;
+  }
+
+  &.m {
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  &:not(.disabled) {
+    &:hover {
+      border-color: colors.$grayscale-4;
+    }
+
+    &:focus-visible,
+    &:active {
+      border-color: colors.$blue-5;
+      box-shadow: 0px 0px 0px 3px rgba(colors.$blue-5, 0.25);
+      outline: none;
+    }
+
+    &.active {
+      border-color: colors.$grayscale-4;
+
+      &:not(:has(:focus-visible)):hover {
+        background: colors.$grayscale-1;
+      }
+
+      &:has(:focus-visible) {
+        border-color: colors.$blue-5;
+      }
+    }
+
+    &.invalid {
+      border-color: colors.$red-1;
+
+      &:hover {
+        border-color: colors.$red-1;
+        background: rgba(colors.$red-1, 0.2);
+      }
+    }
+  }
+
+  &.disabled {
+    background: colors.$grayscale-1;
+    border-color: colors.$grayscale-1;
+    cursor: default;
+  }
+
+  .select-input-output {
+    width: 100%;
+    height: max-content;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    outline: none;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    &.placeholder {
+      color: colors.$grayscale-4;
+    }
+  }
+
+  &.expanded,
+  &:has(.select-input:focus-visible, .select-input:active) {
+    border-color: colors.$blue-5;
+    box-shadow: 0 0 0 3px rgba(colors.$blue-5, 0.25);
+
+    .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .arrow {
+    align-self: center;
+    transition: transform 300ms ease;
+  }
+
+  .clear {
+    align-self: center;
+  }
+}
