@@ -24,6 +24,10 @@
         "nov": "listopad",
         "dec": "grudzień"
       }
+    },
+    "select": {
+      "choose": "wybierz",
+      "search": "szukaj"
     }
   }
 }

@@ -43,6 +43,7 @@ import {
   DropdownOptionsGroup,
 } from '../../../dropdown/dropdown-interfaces';
 import { BaseFormControlComponent } from '../../../internal/base-form-control/base-form-control.component';
+import { I18N_NAMESPACE } from '../../../internal/constants';
 import { DLSDFormControlErrorComponent } from '../../../internal/form-control-error/form-control-error.component';
 import { caretSelectionPosition } from '../../../internal/utilities/selection-position';
 import { DLSDInputLabelComponent } from '../../../labels/input-label/input-label.component';
@@ -79,7 +80,7 @@ export class DLSDSelectComponent<T>
   extends BaseFormControlComponent
   implements ControlValueAccessor, OnInit
 {
-  protected readonly I18N = '';
+  protected readonly I18N = `${I18N_NAMESPACE}.select`;
 
   @HostBinding('style.width') @Input() public width = '100%';
 
