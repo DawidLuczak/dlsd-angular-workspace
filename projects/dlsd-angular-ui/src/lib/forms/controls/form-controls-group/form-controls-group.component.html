@@ -1,0 +1,22 @@
+<div class="form-group">
+  @if (label()) {
+  <dlsd-input-label
+    [type]="type()"
+    [label]="label()"
+    [required]="required"
+    [disabled]="disabled"
+    [hint]="hint()"
+    (labelClick)="labelClick()"
+  ></dlsd-input-label>
+  }
+
+  <div [ngStyle]="{ 'gap.px': gap() }" class="group">
+    <ng-content></ng-content>
+  </div>
+</div>
+
+@if (formControls() && errors()) {
+<dlsd-form-control-error
+  [formControls]="formControls()!"
+></dlsd-form-control-error>
+}

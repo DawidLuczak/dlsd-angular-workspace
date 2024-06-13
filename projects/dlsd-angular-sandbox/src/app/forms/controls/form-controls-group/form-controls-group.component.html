@@ -1,0 +1,18 @@
+<h2>Form controls group</h2>
+
+<dlsd-form-controls-group
+  [formGroup]="form"
+  label="Controls group"
+  [formControls]="[form.controls.input, form.controls.select]"
+  (focusInput)="input.focus()"
+>
+  <dlsd-input formControlName="input" size="s" #input></dlsd-input>
+  <dlsd-select
+    formControlName="select"
+    size="s"
+    [options]="[
+      { name: 'Option 1', value: 1 },
+      { name: 'Option 2', value: 2 }
+    ]"
+  ></dlsd-select>
+</dlsd-form-controls-group>
