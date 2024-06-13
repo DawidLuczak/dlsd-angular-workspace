@@ -1,0 +1,14 @@
+<div
+  class="toast {{ color() }}"
+  [ngClass]="{ 'fade-out': fadeOutAnimation() }"
+  (mouseenter)="clearTimer()"
+  (mouseleave)="startTimer()"
+  #toastRef
+>
+  <span>{{ message() }}</span>
+
+  <dlsd-toast-close-button
+    [color]="color()"
+    (click)="close()"
+  ></dlsd-toast-close-button>
+</div>
