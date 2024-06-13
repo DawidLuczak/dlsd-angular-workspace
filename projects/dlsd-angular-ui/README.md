@@ -1,24 +1,41 @@
 # DlsdAngularUi
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.0.
+This is Angular UI components library with custom implementations and without using any other UI libraries.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name --project dlsd-angular-ui` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project dlsd-angular-ui`.
-> Note: Don't forget to add `--project dlsd-angular-ui` or else it will be added to the default project in your `angular.json` file. 
+- **Buttons**
 
-## Build
+- **Dropdowns**
 
-Run `ng build dlsd-angular-ui` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Forms**:
 
-## Publishing
+  - **Inputs**:
 
-After building your library with `ng build dlsd-angular-ui`, go to the dist folder `cd dist/dlsd-angular-ui` and run `npm publish`.
+    - **Input**
 
-## Running unit tests
+    - **Select**
 
-Run `ng test dlsd-angular-ui` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    - **Timepicker**
 
-## Further help
+    - **Datepicker**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    - **Checkbox**
+
+    - **Radio Button**
+
+    - **Switch**
+
+  - **Controls**:
+
+    - **Form Controls Group**
+
+    - **Form Control Errors**
+
+- **Pagination**
+
+- **Tabs**
+
+- **Toasts**
+
+- **Tooltips**
