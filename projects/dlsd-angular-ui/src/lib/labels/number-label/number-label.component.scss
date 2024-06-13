@@ -1,0 +1,57 @@
+@use "colors";
+@use "mixins";
+
+.label {
+  width: fit-content;
+  padding: 3px;
+  transition: none 300ms ease;
+  transition-property: background, color;
+  user-select: none;
+
+  &.gray {
+    background: colors.$grayscale-2;
+
+    &.disabled {
+      background: colors.$grayscale-2;
+      color: colors.$grayscale-5;
+    }
+
+    &:not(.disabled):not(.active) {
+      &:hover {
+        background: colors.$grayscale-3;
+      }
+    }
+  }
+
+  &.white {
+    @include mixins.convex-shadow("s");
+    background: colors.$grayscale-0;
+    transition: none 300ms ease;
+    transition-property: background, color, box-shadow;
+
+    &.disabled {
+      @include mixins.concave-shadow();
+      background: colors.$grayscale-3;
+      color: colors.$grayscale-5;
+    }
+
+    &:not(.disabled):not(.active) {
+      &:hover {
+        box-shadow: 0px 1px 2px 0px rgba(colors.$grayscale-9, 0.2);
+      }
+    }
+  }
+
+  &.active {
+    &.gray {
+      background: colors.$blue-5;
+      color: colors.$grayscale-0;
+    }
+
+    &.white {
+      background: colors.$blue-5;
+      color: colors.$grayscale-0;
+      box-shadow: none;
+    }
+  }
+}
