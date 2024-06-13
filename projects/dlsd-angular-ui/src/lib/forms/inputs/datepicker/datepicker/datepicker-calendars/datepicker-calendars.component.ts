@@ -11,21 +11,21 @@ import {
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgLetModule } from 'ng-let';
-import { DLSDButtonComponent } from '../../../../buttons';
-import { I18N_NAMESPACE } from '../../../../internal/constants';
+import { DLSDButtonComponent } from '../../../../../buttons';
+import { I18N_NAMESPACE } from '../../../../../internal/constants';
 import { MONTH_NAMES } from '../../constants';
-import { CalendarRole, CalendarView } from '../../enums';
+import { DLSDCalendarRole, DLSDCalendarView } from '../../enums';
 import { getDate } from '../../helpers';
 import {
-  DATEPICKER_CALENDARS_CONFIG,
-  DatepickerConfig,
-  DatepickerDateRange,
+  DLSDDatepickerConfig,
+  DLSDDatepickerDateRange,
+  DLSD_DATEPICKER_CALENDARS_CONFIG,
 } from '../../interfaces';
 import { DLSDDatepickerCalendarHeadbarComponent } from './datepicker-calendar-headbar/datepicker-calendar-headbar.component';
 import { DLSDDatepickerCalendarComponent } from './datepicker-calendar/datepicker-calendar.component';
 
 @Component({
-  selector: 'onyx-datepicker-calendars',
+  selector: 'dll-datepicker-calendars',
   standalone: true,
   imports: [
     DLSDDatepickerCalendarComponent,
@@ -40,25 +40,25 @@ import { DLSDDatepickerCalendarComponent } from './datepicker-calendar/datepicke
 })
 export class DLSDDatepickerCalendarsComponent implements OnInit {
   protected readonly MONTH_NAMES = MONTH_NAMES;
-  protected readonly CalendarView = CalendarView;
-  protected readonly CalendarRole = CalendarRole;
+  protected readonly CalendarView = DLSDCalendarView;
+  protected readonly CalendarRole = DLSDCalendarRole;
   protected readonly I18N = `${I18N_NAMESPACE}.datepicker`;
 
-  protected view = signal<CalendarView>(CalendarView.CALENDAR);
+  protected view = signal<DLSDCalendarView>(DLSDCalendarView.CALENDAR);
   protected today = signal<Date>(new Date());
   protected calendars = signal<{ from: Date[]; to: Date[] }>({
     from: [],
     to: [],
   });
-  protected date = signal<DatepickerDateRange>({});
+  protected date = signal<DLSDDatepickerDateRange>({});
   protected disableDate = signal<
-    (dateRange: DatepickerDateRange, date: Date) => boolean
+    (dateRange: DLSDDatepickerDateRange, date: Date) => boolean
   >(() => false);
   protected yearsRange = signal<number[]>([]);
 
   constructor(
-    @Inject(DATEPICKER_CALENDARS_CONFIG)
-    protected config: DatepickerConfig,
+    @Inject(DLSD_DATEPICKER_CALENDARS_CONFIG)
+    protected config: DLSDDatepickerConfig,
     private injector: Injector
   ) {
     if (config.withDateRange) {
@@ -93,7 +93,7 @@ export class DLSDDatepickerCalendarsComponent implements OnInit {
     this.config.disableFocusout();
   }
 
-  protected setDates(date: DatepickerDateRange, newDate: Date): void {
+  protected setDates(date: DLSDDatepickerDateRange, newDate: Date): void {
     if (this.config.withDateRange) {
       this.setDateRange(date, newDate);
     } else {
@@ -102,7 +102,7 @@ export class DLSDDatepickerCalendarsComponent implements OnInit {
     }
   }
 
-  protected setDateRange(date: DatepickerDateRange, newDate: Date): void {
+  protected setDateRange(date: DLSDDatepickerDateRange, newDate: Date): void {
     if (!date.from) {
       date.from = newDate;
     } else if (!date.to) {
@@ -119,8 +119,8 @@ export class DLSDDatepickerCalendarsComponent implements OnInit {
     this.config.changeDate({});
   }
 
-  protected changeView(view: CalendarView): void {
-    if (view === CalendarView.CALENDAR) {
+  protected changeView(view: DLSDCalendarView): void {
+    if (view === DLSDCalendarView.CALENDAR) {
       this.setCalendars(this.calendars().from[0]);
     }
 
@@ -138,14 +138,14 @@ export class DLSDDatepickerCalendarsComponent implements OnInit {
     const date = this.calendars().from[0];
     date.setFullYear(year);
     this.setCalendars(date);
-    this.view.set(CalendarView.CALENDAR);
+    this.view.set(DLSDCalendarView.CALENDAR);
   }
 
   protected selectCalendarMonth(month: number): void {
     const date = this.calendars().from[0];
     date.setMonth(month);
     this.setCalendars(date);
-    this.view.set(CalendarView.CALENDAR);
+    this.view.set(DLSDCalendarView.CALENDAR);
   }
 
   protected changeCalendarMonth(value: -1 | 1): void {
@@ -186,7 +186,7 @@ export class DLSDDatepickerCalendarsComponent implements OnInit {
   }
 
   private disableDateBeforeFromDate = (
-    dateRange: DatepickerDateRange,
+    dateRange: DLSDDatepickerDateRange,
     date: Date
   ): boolean => {
     return !dateRange.to &&
