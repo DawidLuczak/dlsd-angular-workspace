@@ -1,13 +1,13 @@
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { TimepickerTimeRange } from '../interfaces';
-import { timeRangeValidator } from './time-range-validator';
+import { dlsdTimeRangeValidator } from './time-range-validator';
 
-describe('timeRangeRequiredValidator', () => {
+describe('dlsdTimeRangeRequiredValidator', () => {
   let timeRangeFormControl: FormControl<TimepickerTimeRange | null>;
   let timeRangeControlErrors: ValidationErrors | null;
 
   beforeEach(() => {
-    timeRangeFormControl = new FormControl(null, timeRangeValidator);
+    timeRangeFormControl = new FormControl(null, dlsdTimeRangeValidator);
     timeRangeFormControl.markAsTouched();
     timeRangeFormControl.markAsDirty();
   });

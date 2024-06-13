@@ -1,10 +1,10 @@
-export enum CalendarView {
+export enum DLSDCalendarView {
   CALENDAR,
   MONTHS,
   YEARS,
 }
 
-export enum CalendarRole {
+export enum DLSDCalendarRole {
   FROM,
   TO,
 }

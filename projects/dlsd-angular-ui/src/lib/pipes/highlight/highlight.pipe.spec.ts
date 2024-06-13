@@ -1,8 +1,8 @@
-import { HighlightPipe } from './highlight.pipe';
+import { DLSDHighlightPipe } from './highlight.pipe';
 
 describe('HighlightPipe', () => {
   it('create an instance', () => {
-    const pipe = new HighlightPipe();
+    const pipe = new DLSDHighlightPipe();
     expect(pipe).toBeTruthy();
   });
 });

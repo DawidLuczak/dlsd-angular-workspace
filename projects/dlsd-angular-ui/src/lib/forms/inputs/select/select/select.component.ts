@@ -35,26 +35,26 @@ import {
   map,
   switchMap,
 } from 'rxjs';
-import { DLSDClearButtonComponent } from '../../../buttons';
-import { DLSDTextsOverflowDirective } from '../../../directives';
-import { DropdownDirective } from '../../../dropdown';
+import { DLSDClearButtonComponent } from '../../../../buttons';
+import { DLSDTextsOverflowDirective } from '../../../../directives';
 import {
-  DropdownOption,
-  DropdownOptionsGroup,
-} from '../../../dropdown/dropdown-interfaces';
-import { BaseFormControlComponent } from '../../../internal/base-form-control/base-form-control.component';
-import { I18N_NAMESPACE } from '../../../internal/constants';
-import { DLSDFormControlErrorComponent } from '../../../internal/form-control-error/form-control-error.component';
-import { caretSelectionPosition } from '../../../internal/utilities/selection-position';
-import { DLSDInputLabelComponent } from '../../../labels/input-label/input-label.component';
-import { TooltipDirective } from '../../../tooltip';
+  DLSDDropdownDirective,
+  DLSDDropdownOption,
+  DLSDDropdownOptionsGroup,
+} from '../../../../dropdown';
+import { I18N_NAMESPACE } from '../../../../internal/constants';
+import { caretSelectionPosition } from '../../../../internal/utilities/selection-position';
+import { TooltipDirective } from '../../../../tooltip';
+import { DLSDFormControlErrorComponent } from '../../../controls';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
+import { DLSDInputLabelComponent } from '../../../labels';
 
 @Component({
   selector: 'dlsd-select',
   standalone: true,
   imports: [
     DLSDInputLabelComponent,
-    DropdownDirective,
+    DLSDDropdownDirective,
     DLSDClearButtonComponent,
     DLSDFormControlErrorComponent,
     DLSDTextsOverflowDirective,
@@ -77,7 +77,7 @@ import { TooltipDirective } from '../../../tooltip';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DLSDSelectComponent<T>
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor, OnInit
 {
   protected readonly I18N = `${I18N_NAMESPACE}.select`;
@@ -85,12 +85,12 @@ export class DLSDSelectComponent<T>
   @HostBinding('style.width') @Input() public width = '100%';
 
   public source =
-    input<(query: string) => Observable<DropdownOption<T>[] | null>>();
+    input<(query: string) => Observable<DLSDDropdownOption<T>[] | null>>();
   public options = input<
-    DropdownOption<T>[] | null,
-    DropdownOption<T>[] | null
+    DLSDDropdownOption<T>[] | null,
+    DLSDDropdownOption<T>[] | null
   >(null, {
-    transform: (options: DropdownOption<T>[] | null) => cloneDeep(options),
+    transform: (options: DLSDDropdownOption<T>[] | null) => cloneDeep(options),
   });
   public optionTemplateRef = input<TemplateRef<any>>();
   public label = input<string>();
@@ -112,13 +112,13 @@ export class DLSDSelectComponent<T>
   protected disabled = signal(false);
   protected expanded = signal<boolean>(false);
   protected query = signal<string>('');
-  protected value = signal<DropdownOption<T>[]>([]);
+  protected value = signal<DLSDDropdownOption<T>[]>([]);
   protected valueNames = computed(() =>
     this.value().map((value) => value.name)
   );
 
   private _options$ = new BehaviorSubject<{
-    options: DropdownOptionsGroup<T>[] | null;
+    options: DLSDDropdownOptionsGroup<T>[] | null;
     query: string;
   }>({ options: null, query: '' });
   protected get options$() {
@@ -127,7 +127,7 @@ export class DLSDSelectComponent<T>
 
   private formControlValue = signal<T[]>([]);
   private request$ = new Subject<{
-    source: (query: string) => Observable<DropdownOption<T>[] | null>;
+    source: (query: string) => Observable<DLSDDropdownOption<T>[] | null>;
     query: string;
   }>();
 
@@ -199,11 +199,11 @@ export class DLSDSelectComponent<T>
     if (isArray(value)) {
       const values = value
         .map((v) => options.find((option) => option.value === v))
-        .filter((option): option is DropdownOption<T> => !!option)
+        .filter((option): option is DLSDDropdownOption<T> => !!option)
         .map((option) => {
           option.selected = true;
           return option;
-        }) as DropdownOption<T>[];
+        }) as DLSDDropdownOption<T>[];
       this.changeValue(values);
     } else {
       const option = options.find((option) => option.value === value);
@@ -285,7 +285,7 @@ export class DLSDSelectComponent<T>
       const value = this._options$.value;
       value.options?.forEach((optionGroup) =>
         optionGroup.options.forEach(
-          (option: DropdownOption<T>) => (option.selected = false)
+          (option: DLSDDropdownOption<T>) => (option.selected = false)
         )
       );
     }
@@ -306,15 +306,15 @@ export class DLSDSelectComponent<T>
     this.selectRef().nativeElement.click();
   }
 
-  protected selectAll(options: DropdownOption<T>[]): void {
+  protected selectAll(options: DLSDDropdownOption<T>[]): void {
     const value = options.length === this.value().length;
     options.forEach((o) => (o.selected = value));
     this.changeValue(options);
   }
 
   protected selectValueChange(event: {
-    value: DropdownOption<T>;
-    options: DropdownOption<T>[];
+    value: DLSDDropdownOption<T>;
+    options: DLSDDropdownOption<T>[];
   }): void {
     if (this.multiple()) {
       this.selectMultipleOption(event.value, event.options);
@@ -347,7 +347,7 @@ export class DLSDSelectComponent<T>
     event.preventDefault();
   }
 
-  private changeValue(value: DropdownOption<T>[]): void {
+  private changeValue(value: DLSDDropdownOption<T>[]): void {
     this.value.set(value);
     this.formControlValue.set(value.map((v) => v.value));
     this.onChange?.(
@@ -356,7 +356,7 @@ export class DLSDSelectComponent<T>
     this.onTouched?.();
   }
 
-  private selectSingleOption(option: DropdownOption<T>): void {
+  private selectSingleOption(option: DLSDDropdownOption<T>): void {
     const value = this.value();
     if (!this.optional() && option.selected) return;
 
@@ -366,8 +366,8 @@ export class DLSDSelectComponent<T>
   }
 
   private selectMultipleOption(
-    value: DropdownOption<T>,
-    options: DropdownOption<T>[]
+    value: DLSDDropdownOption<T>,
+    options: DLSDDropdownOption<T>[]
   ): void {
     value.selected = !value.selected;
     const selectedOptions = options.filter((option) => option.selected);
@@ -375,9 +375,9 @@ export class DLSDSelectComponent<T>
   }
 
   private searchOptions(
-    options: DropdownOption<T>[],
+    options: DLSDDropdownOption<T>[],
     query: string
-  ): DropdownOption<T>[] {
+  ): DLSDDropdownOption<T>[] {
     if (!query) return options;
 
     const queryLowercase = query.toLowerCase();
@@ -386,7 +386,7 @@ export class DLSDSelectComponent<T>
     );
   }
 
-  private selectOptionsWithValue(options: DropdownOption<T>[]): void {
+  private selectOptionsWithValue(options: DLSDDropdownOption<T>[]): void {
     if (this.value().length) {
       this.value().forEach((value) => {
         const option = options.find((option) => option.value === value.value);

@@ -1,25 +1,24 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
-import { CustomOverlayConfig } from '../../overlay/interfaces';
+import { DLSDCustomOverlayConfig } from '../../../overlay/interfaces';
 
-export const DATEPICKER_CALENDARS_CONFIG = new InjectionToken<DatepickerConfig>(
-  'Datepicker calendars config'
-);
+export const DLSD_DATEPICKER_CALENDARS_CONFIG =
+  new InjectionToken<DLSDDatepickerConfig>('Datepicker calendars config');
 
-export interface DatepickerConfig extends CustomOverlayConfig {
-  changeDate: (value: DatepickerDateRange | null) => void;
-  date: WritableSignal<DatepickerDateRange>;
+export interface DLSDDatepickerConfig extends DLSDCustomOverlayConfig {
+  changeDate: (value: DLSDDatepickerDateRange | null) => void;
+  date: WritableSignal<DLSDDatepickerDateRange>;
   disableFocusout: () => void;
   showRelativeDays?: boolean;
   withDateRange: boolean;
-  yearsRange: DatepickerYearsRange;
+  yearsRange: DLSDDatepickerYearsRange;
 }
 
-export interface DatepickerDateRange {
+export interface DLSDDatepickerDateRange {
   from?: Date | null;
   to?: Date | null;
 }
 
-export interface DatepickerYearsRange {
+export interface DLSDDatepickerYearsRange {
   past: number;
   future: number;
 }

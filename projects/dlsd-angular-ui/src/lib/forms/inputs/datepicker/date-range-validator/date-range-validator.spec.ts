@@ -1,13 +1,13 @@
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { DatepickerDateRange } from '../interfaces';
-import { dateRangeValidator } from './date-range-validator';
+import { DLSDDatepickerDateRange } from '../interfaces';
+import { dlsdDateRangeValidator } from './date-range-validator';
 
-describe('dateRangeValidator', () => {
-  let dateRangeFormControl: FormControl<DatepickerDateRange | null>;
+describe('dlsdDateRangeValidator', () => {
+  let dateRangeFormControl: FormControl<DLSDDatepickerDateRange | null>;
   let dateRangeControlErrors: ValidationErrors | null;
 
   beforeEach(() => {
-    dateRangeFormControl = new FormControl(null, dateRangeValidator);
+    dateRangeFormControl = new FormControl(null, dlsdDateRangeValidator);
     dateRangeFormControl.markAsTouched();
     dateRangeFormControl.markAsDirty();
   });

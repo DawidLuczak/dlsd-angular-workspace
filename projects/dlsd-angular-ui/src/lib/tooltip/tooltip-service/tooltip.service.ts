@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, filter, fromEvent, takeUntil, timer } from 'rxjs';
 import overlayPositions from '../../overlay/overlay-positions';
-import { OverlayService } from '../../overlay/overlay-service/overlay.service';
+import { DLSDOverlayService } from '../../overlay/overlay-service/overlay.service';
 import {
   TOOLTIP_CONFIG,
   TooltipContext,
@@ -24,7 +24,7 @@ export class TooltipService {
     arrowY: number;
   }>({ arrowX: 0, arrowY: 0 });
 
-  constructor(private overlayService: OverlayService) {}
+  constructor(private overlayService: DLSDOverlayService) {}
 
   public attachTooltip(
     sourceRef: ElementRef,

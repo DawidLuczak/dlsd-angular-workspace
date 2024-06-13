@@ -25,7 +25,7 @@ import { DLSDDatepickerCalendarHeadbarComponent } from './datepicker-calendar-he
 import { DLSDDatepickerCalendarComponent } from './datepicker-calendar/datepicker-calendar.component';
 
 @Component({
-  selector: 'dll-datepicker-calendars',
+  selector: 'dlsd-datepicker-calendars',
   standalone: true,
   imports: [
     DLSDDatepickerCalendarComponent,

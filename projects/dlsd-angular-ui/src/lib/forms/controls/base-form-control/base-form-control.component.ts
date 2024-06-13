@@ -14,7 +14,7 @@ import { FormGroupDirective, NgControl, Validators } from '@angular/forms';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class BaseFormControlComponent implements OnInit {
+export class DLSDBaseFormControlComponent implements OnInit {
   protected formControl?: NgControl;
   private formGroupDirective?: FormGroupDirective;
 

@@ -7,7 +7,7 @@ import {
   output,
 } from '@angular/core';
 import { NgLetModule } from 'ng-let';
-import { CalendarRole, CalendarView } from '../../../enums';
+import { DLSDCalendarRole, DLSDCalendarView } from '../../../enums';
 
 @Component({
   selector: 'dlsd-datepicker-calendar-headbar',
@@ -18,21 +18,21 @@ import { CalendarRole, CalendarView } from '../../../enums';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DLSDDatepickerCalendarHeadbarComponent {
-  protected readonly CalendarView = CalendarView;
-  protected readonly CalendarRole = CalendarRole;
+  protected readonly CalendarView = DLSDCalendarView;
+  protected readonly CalendarRole = DLSDCalendarRole;
 
-  public view = model.required<CalendarView>();
+  public view = model.required<DLSDCalendarView>();
   public date = input.required<Date>();
   public allowOpenChange = input<boolean>(true);
-  public calendarRole = input<CalendarRole>(CalendarRole.FROM);
+  public calendarRole = input<DLSDCalendarRole>(DLSDCalendarRole.FROM);
 
   public changeMonth = output<-1 | 1>();
 
-  protected changeView(view: CalendarView): void {
+  protected changeView(view: DLSDCalendarView): void {
     if (!this.allowOpenChange()) return;
 
     this.view.update((currentView) =>
-      currentView !== view ? view : CalendarView.CALENDAR
+      currentView !== view ? view : DLSDCalendarView.CALENDAR
     );
   }
 }

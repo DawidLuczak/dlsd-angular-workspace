@@ -8,7 +8,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BaseFormControlComponent } from '../../../internal/base-form-control/base-form-control.component';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels';
 import { TimepickerTime, TimepickerTimeRange } from '../interfaces';
 import { DLSDTimepickerInputComponent } from './timepicker-input/timepicker-input.component';
@@ -29,7 +29,7 @@ import { DLSDTimepickerInputComponent } from './timepicker-input/timepicker-inpu
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DLSDTimepickerComponent
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor
 {
   public label = input<string>();

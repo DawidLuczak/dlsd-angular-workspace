@@ -19,14 +19,15 @@ import {
 } from '@angular/forms';
 import { NgLetModule } from 'ng-let';
 import { take } from 'rxjs';
-import { DropdownService } from '../../../dropdown';
-import { BaseFormControlComponent } from '../../../internal/base-form-control/base-form-control.component';
-import { DLSDFormControlErrorComponent } from '../../../internal/form-control-error/form-control-error.component';
+
+import { DLSDDropdownService } from '../../../../dropdown';
+import { DLSDFormControlErrorComponent } from '../../../controls';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels/input-label/input-label.component';
 import {
-  DATEPICKER_CALENDARS_CONFIG,
-  DatepickerDateRange,
-  DatepickerYearsRange,
+  DLSD_DATEPICKER_CALENDARS_CONFIG,
+  DLSDDatepickerDateRange,
+  DLSDDatepickerYearsRange,
 } from '../interfaces';
 import { DLSDDatepickerCalendarsComponent } from './datepicker-calendars/datepicker-calendars.component';
 import { DLSDDatepickerInputComponent } from './datepicker-input/datepicker-input.component';
@@ -54,7 +55,7 @@ import { DLSDDatepickerInputComponent } from './datepicker-input/datepicker-inpu
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DLSDDatepickerComponent
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor, AfterViewInit
 {
   @HostBinding('style.width') @Input() public width = '100%';
@@ -63,12 +64,12 @@ export class DLSDDatepickerComponent
   public hint = input<string>();
   public showRelativeDays = input<boolean>(false);
   public withDateRange = input<boolean>(false);
-  public yearsRange = input<DatepickerYearsRange>({ past: 20, future: 0 });
+  public yearsRange = input<DLSDDatepickerYearsRange>({ past: 20, future: 0 });
 
-  protected onChange?: (value: DatepickerDateRange | Date | null) => void;
+  protected onChange?: (value: DLSDDatepickerDateRange | Date | null) => void;
   protected onTouched?: () => void;
   protected disabled = signal<boolean>(false);
-  protected value = signal<DatepickerDateRange>({});
+  protected value = signal<DLSDDatepickerDateRange>({});
 
   private inputFromDate =
     viewChild.required<DLSDDatepickerInputComponent>('inputFromDateRef');
@@ -80,7 +81,7 @@ export class DLSDDatepickerComponent
   constructor(
     protected override injector: Injector,
     private viewContainerRef: ViewContainerRef,
-    private dropdownService: DropdownService
+    private dropdownService: DLSDDropdownService
   ) {
     super(injector);
   }
@@ -93,18 +94,18 @@ export class DLSDDatepickerComponent
     this.inputToDate()?.setDate(value?.to);
   }
 
-  public writeValue(value: DatepickerDateRange | Date | null): void {
+  public writeValue(value: DLSDDatepickerDateRange | Date | null): void {
     if (!value) {
       this.value.set({});
     } else if (value instanceof Date) {
       this.value.set({ from: value as Date });
     } else {
-      this.value.set(value as DatepickerDateRange);
+      this.value.set(value as DLSDDatepickerDateRange);
     }
   }
 
   public registerOnChange(
-    fn: (value: DatepickerDateRange | Date | null) => void
+    fn: (value: DLSDDatepickerDateRange | Date | null) => void
   ): void {
     this.onChange = fn;
   }
@@ -187,11 +188,11 @@ export class DLSDDatepickerComponent
       this.inputFromDate().inputRef(),
       this.viewContainerRef,
       DLSDDatepickerCalendarsComponent,
-      DATEPICKER_CALENDARS_CONFIG,
+      DLSD_DATEPICKER_CALENDARS_CONFIG,
       {
         hostCss: ['fill'],
         date: this.value,
-        changeDate: (value: DatepickerDateRange | null) =>
+        changeDate: (value: DLSDDatepickerDateRange | null) =>
           this.changeCalendarDate(value),
         disableFocusout: () => this.allowFocusout.set(false),
         showRelativeDays: this.showRelativeDays(),
@@ -205,13 +206,13 @@ export class DLSDDatepickerComponent
       .subscribe(() => this.isCalendarAttached.set(false));
   }
 
-  private changeCalendarDate(value: DatepickerDateRange | null): void {
+  private changeCalendarDate(value: DLSDDatepickerDateRange | null): void {
     this.changeDateValue(value ?? {});
     this.inputFromDate().setDate(value?.from);
     this.inputToDate()?.setDate(value?.to);
   }
 
-  private changeDateValue(value: DatepickerDateRange): void {
+  private changeDateValue(value: DLSDDatepickerDateRange): void {
     this.value.set(value);
     this.onChange?.(this.withDateRange() ? value : value.from ?? null);
     this.onTouched?.();

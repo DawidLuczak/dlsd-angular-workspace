@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DLSDCheckboxComponent } from '../../../../../../dlsd-angular-ui/src/lib/checkbox';
+import { DLSDCheckboxComponent } from '../../../../../../dlsd-angular-ui/src/public-api';
 
 @Component({
   selector: 'app-checkbox',
