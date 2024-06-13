@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class OverlayService {
+export class DLSDOverlayService {
   private _overlayRef = signal<OverlayRef | undefined>(undefined);
   public get overlayRef() {
     return this._overlayRef.asReadonly();
@@ -46,7 +46,7 @@ export class OverlayService {
     return this.overlay.scrollStrategies;
   }
 
-  constructor(private overlay: Overlay) {}
+  constructor(protected overlay: Overlay) {}
 
   public attachToOverlay<T>(componentPortal: ComponentPortal<T>): void {
     const overlayRef = this.overlayRef();

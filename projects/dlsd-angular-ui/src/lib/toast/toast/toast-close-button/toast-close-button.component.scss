@@ -1,0 +1,76 @@
+@use "colors";
+@use "mixins";
+
+button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: colors.$grayscale-0;
+  transition: background 300ms ease;
+  cursor: pointer;
+
+  &:hover dlsd-icon {
+    transform: rotate(90deg);
+  }
+
+  &:focus-visible {
+    @include mixins.focus-outline(0);
+  }
+
+  /* Colors */
+
+  &.red {
+    background: colors.$red-4;
+
+    &:hover {
+      background: colors.$red-3;
+    }
+
+    &:active {
+      background: colors.$red-5;
+    }
+  }
+
+  &.green {
+    background: colors.$green-5;
+
+    &:hover {
+      background: colors.$green-4;
+    }
+
+    &:active {
+      background: colors.$green-5;
+    }
+  }
+
+  &.gray {
+    background: colors.$grayscale-4;
+
+    &:hover {
+      background: colors.$grayscale-3;
+    }
+
+    &:active {
+      background: colors.$grayscale-6;
+    }
+  }
+
+  &.yellow {
+    background: colors.$yellow-2;
+    color: colors.$grayscale-9;
+
+    &:hover {
+      background: colors.$yellow-1;
+    }
+
+    &:active {
+      background: colors.$yellow-4;
+    }
+  }
+
+  dlsd-icon {
+    transition: transform 300ms ease;
+  }
+}

@@ -1,0 +1,18 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
+<button
+  class="toggle {{ size() }}"
+  [ngClass]="{ active: value(), disabled: disabled(), invalid: isInvalid }"
+  type="button"
+  [disabled]="disabled()"
+  [tabindex]="disabled() ? -1 : 0"
+  (focusout)="onTouched?.()"
+></button>
+
+@if (label(); as label) {
+<dlsd-input-label
+  type="title"
+  [label]="label"
+  [disabled]="disabled()"
+  [required]="isRequired"
+></dlsd-input-label>
+}

@@ -1,0 +1,73 @@
+<!-- eslint-disable @angular-eslint/template/mouse-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+@if (label(); as label) {
+<dlsd-input-label
+  [label]="label"
+  [hint]="hint()"
+  [required]="isRequired"
+  [disabled]="disabled()"
+  (click)="openSelect()"
+></dlsd-input-label>
+}
+
+<div
+  class="select {{ size() }}"
+  [ngClass]="{
+    expanded: expanded(),
+    active: value().length,
+    disabled: disabled(),
+    invalid: isInvalid
+  }"
+  [tabIndex]="disabled() ? -1 : 0"
+  [dlsdDropdownOptions]="options$"
+  [dropdownOptionTemplateRef]="optionTemplateRef()"
+  [dropdownDisabled]="disabled()"
+  [dropdownMultiple]="multiple()"
+  [dropdownInheritWidth]="true"
+  [dropdownSearch]="search()"
+  [dropdownOptional]="optional()"
+  [(dropdownAttached)]="expanded"
+  [dlsdTooltip]="tooltip()"
+  (dropdownValueChange)="selectValueChange($event)"
+  (dropdownOptionAdd)="handleAddOption.emit($event)"
+  (dropdownClearValue)="clearValue()"
+  (focusout)="onTouched?.()"
+  (focus)="focusSearchInput()"
+  (keydown.backspace)="clearValueUsingKeyboard($event)"
+  #selectElementRef
+>
+  <div
+    *ngLet="(search() || addOption()) && expanded() as editable"
+    class="select-input-output f-regular-1"
+    [ngClass]="{ placeholder: !value().length && !query().length }"
+    [contentEditable]="editable"
+    [tabIndex]="-1"
+    [textsOverflow]="!expanded() || !optional() ? valueNames() : query()"
+    [textsOverflowPlaceholder]="
+      (search() ? I18N + '.search' : I18N + '.choose') | translate
+    "
+    [textsOverflowElementRef]="selectRef()"
+    (focus)="$event.stopPropagation()"
+    (click)="focusSearchInput()"
+    (input)="changeInput($event)"
+    (keydown.backspace)="backspaceInput($event)"
+    (keydown.control.backspace)="clearValue()"
+    (keydown.meta.backspace)="clearValue()"
+    (keydown.arrowleft)="disableArrowMovesCursor($event)"
+    (keydown.arrowright)="disableArrowMovesCursor($event)"
+  ></div>
+
+  <ng-content></ng-content>
+
+  @if (value().length && optional() && !disabled()) {
+  <dlsd-clear-button class="clear" (click)="clearValue()"></dlsd-clear-button>
+  }
+</div>
+
+@if (formControl && showErrors()) {
+<dlsd-form-control-error
+  [formControls]="[formControl]"
+  [size]="size()"
+></dlsd-form-control-error>
+}

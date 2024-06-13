@@ -7,17 +7,17 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { CustomOverlayConfig } from '../../overlay/interfaces';
+import { DLSDCustomOverlayConfig } from '../../overlay/interfaces';
 import overlayPositions from '../../overlay/overlay-positions';
-import { OverlayService } from '../../overlay/overlay-service/overlay.service';
-import { DropdownOverlayConfig } from '../dropdown-interfaces';
+import { DLSDOverlayService } from '../../overlay/overlay-service/overlay.service';
+import { DLSDDropdownOverlayConfig } from '../dropdown-interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DropdownService {
+export class DLSDDropdownService {
   private intersectionObserver?: IntersectionObserver;
-  private subDropdowns: DropdownOverlayConfig[] = [];
+  private subDropdowns: DLSDDropdownOverlayConfig[] = [];
 
   public get detach$() {
     return this.overlayService.detach$;
@@ -31,9 +31,9 @@ export class DropdownService {
     return this.overlayService.overlayRef()?.hasAttached();
   }
 
-  constructor(private overlayService: OverlayService) {}
+  constructor(private overlayService: DLSDOverlayService) {}
 
-  public attachDropdown<T extends CustomOverlayConfig, CT>(
+  public attachDropdown<T extends DLSDCustomOverlayConfig, CT>(
     sourceRef: ElementRef,
     viewContainerRef: ViewContainerRef,
     component: Type<CT>,
@@ -66,7 +66,7 @@ export class DropdownService {
     // }
   }
 
-  public attachSubDropdown<T extends CustomOverlayConfig, CT>(
+  public attachSubDropdown<T extends DLSDCustomOverlayConfig, CT>(
     sourceRef: ElementRef,
     viewContainerRef: ViewContainerRef,
     component: Type<CT>,
@@ -123,7 +123,7 @@ export class DropdownService {
 
   private createOverlayWithPositions(
     sourceRef: ElementRef,
-    config: CustomOverlayConfig
+    config: DLSDCustomOverlayConfig
   ): void {
     const positionStrategy = this.overlayService.defaultPositionStrategy(
       config.targetRef ?? sourceRef.nativeElement,

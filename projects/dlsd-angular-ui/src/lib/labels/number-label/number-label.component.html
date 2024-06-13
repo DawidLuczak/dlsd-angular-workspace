@@ -1,0 +1,9 @@
+<p
+  class="{{ type() }} label f-label-3"
+  [ngClass]="{
+    active: active() == null ? value() > 0 : active(),
+    disabled: disabled()
+  }"
+>
+  {{ value() }}
+</p>

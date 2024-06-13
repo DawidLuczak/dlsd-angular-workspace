@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dlsdHighlight',
   standalone: true,
 })
-export class HighlightPipe implements PipeTransform {
+export class DLSDHighlightPipe implements PipeTransform {
   public transform(value: string, query: string): string {
     if (!query) return value;
 

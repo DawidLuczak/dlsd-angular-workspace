@@ -1,0 +1,17 @@
+<div class="container" [ngClass]="{ disabled: disabled() }">
+  <div
+    class="radio"
+    [ngClass]="{ active: active(), invalid: isInvalid }"
+    [tabindex]="disabled() ? -1 : 0"
+    (focusout)="onTouched?.()"
+  ></div>
+
+  @if (label(); as label) {
+  <dlsd-input-label
+    type="title"
+    [label]="label"
+    [disabled]="disabled()"
+    [required]="isRequired"
+  ></dlsd-input-label>
+  }
+</div>

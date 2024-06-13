@@ -1,7 +1,7 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { OverlayPosition } from './overlay-positions';
 
-export interface CustomOverlayConfig {
+export interface DLSDCustomOverlayConfig {
   attachElementRef?: boolean;
   hasBackdrop?: boolean;
   hostCss: ('s' | 'm' | 'l' | 'fill' | 'dark')[];

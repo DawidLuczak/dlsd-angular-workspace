@@ -1,1 +1,1 @@
-export * from './input-label/input-label.component';
+export * from './number-label/number-label.component';

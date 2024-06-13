@@ -1,0 +1,78 @@
+@use "colors";
+
+:host {
+  display: inline-flex;
+}
+
+.container {
+  width: fit-content;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    .radio {
+      border-color: colors.$grayscale-5;
+
+      &.active {
+        border-color: colors.$blue-3;
+      }
+
+      &.invalid {
+        background-color: rgba(colors.$red-1, 0.2);
+        border-color: colors.$red-1;
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+
+    .radio {
+      border-color: colors.$grayscale-3;
+      background: colors.$grayscale-1;
+    }
+
+    .active {
+      .radio {
+        border-color: colors.$blue-4;
+      }
+    }
+  }
+}
+
+.radio {
+  width: 16px;
+  height: 16px;
+  align-self: center;
+  display: inline-grid;
+  place-items: center;
+  background: colors.$grayscale-0;
+  border: 1px solid colors.$grayscale-4;
+  border-radius: 50%;
+  outline: none;
+  transition: none 300ms ease;
+  transition-property: background, border-color;
+
+  &.active {
+    border: 4px solid colors.$blue-5;
+  }
+
+  &:focus-visible {
+    &::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      border: 2px solid colors.$blue-5;
+      border-radius: 50%;
+    }
+  }
+
+  &.invalid {
+    border-color: colors.$red-1;
+  }
+}

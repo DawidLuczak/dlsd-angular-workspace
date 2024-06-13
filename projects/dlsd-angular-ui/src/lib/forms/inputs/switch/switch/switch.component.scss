@@ -1,0 +1,106 @@
+@use "colors";
+@use "mixins";
+
+:host {
+  width: fit-content;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+
+  &:not(:has(.disabled)) {
+    cursor: pointer;
+
+    &:hover {
+      .toggle {
+        background: colors.$grayscale-5;
+
+        &.active {
+          background: colors.$blue-5;
+        }
+      }
+    }
+  }
+}
+
+.toggle {
+  position: relative;
+  background: colors.$grayscale-4;
+  border: none;
+  padding: 0;
+  cursor: inherit;
+  transition: background-color 300ms ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    transform: translateY(-50%);
+    background: colors.$grayscale-0;
+    border-radius: 50%;
+    transition: 300ms left ease;
+  }
+
+  &:focus-visible {
+    @include mixins.focus-outline();
+  }
+
+  &.active {
+    background: colors.$blue-5;
+
+    &.disabled {
+      background: colors.$grayscale-4;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background: colors.$grayscale-3;
+  }
+
+  &.s {
+    width: 28px;
+    height: 16px;
+    border-radius: 12px;
+
+    &::before {
+      width: 12px;
+      height: 12px;
+    }
+
+    &.active::before {
+      left: calc(100% - 14px);
+    }
+  }
+
+  &.m {
+    width: 32px;
+    height: 20px;
+    border-radius: 14px;
+
+    &::before {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.active::before {
+      left: calc(100% - 18px);
+    }
+  }
+
+  &.l {
+    width: 40px;
+    height: 24px;
+    border-radius: 16px;
+
+    &::before {
+      width: 20px;
+      height: 20px;
+    }
+
+    &.active::before {
+      left: calc(100% - 22px);
+    }
+  }
+}
