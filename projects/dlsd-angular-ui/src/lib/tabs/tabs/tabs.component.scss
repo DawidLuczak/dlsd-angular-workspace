@@ -1,0 +1,141 @@
+@use "colors";
+@use "mixins";
+
+.tabs,
+.submenu {
+  width: max-content;
+  position: relative;
+  display: flex;
+
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .indicator {
+    position: absolute;
+  }
+}
+
+.tabs {
+  background: colors.$grayscale-2;
+
+  &.s {
+    height: 32px;
+
+    .tab {
+      padding: 0 8px;
+    }
+  }
+
+  &.m {
+    height: 40px;
+
+    .tab {
+      padding: 0 12px;
+    }
+  }
+
+  .tab {
+    border-top: 2px solid colors.$grayscale-2;
+    border-bottom: 2px solid colors.$grayscale-2;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    transition: none 300ms ease;
+    transition-property: background, border-color;
+    z-index: 1;
+
+    &:first-child {
+      border-left-color: colors.$grayscale-2;
+    }
+
+    &:last-of-type {
+      border-right-color: colors.$grayscale-2;
+    }
+
+    &:not(.disabled) {
+      &:hover:not(.active) {
+        background: colors.$grayscale-3;
+      }
+
+      &:focus-visible {
+        border-color: colors.$blue-5;
+      }
+
+      &.active {
+        color: colors.$blue-5;
+        cursor: default;
+      }
+    }
+
+    &.disabled {
+      color: colors.$grayscale-5;
+      cursor: default;
+    }
+
+    &.icon {
+      padding: 0 6px;
+    }
+  }
+
+  .indicator {
+    height: 100%;
+    left: 2px;
+    background: colors.$grayscale-0;
+    border-top: 2px solid colors.$grayscale-2;
+    border-bottom: 2px solid colors.$grayscale-2;
+  }
+}
+
+.submenu {
+  height: 48px;
+  gap: 16px;
+
+  .tab {
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    transition: border-color 300ms ease;
+
+    &:not(.disabled) {
+      &:hover:not(.active) {
+        border-bottom-color: colors.$grayscale-2;
+      }
+
+      &:focus-visible {
+        @include mixins.focus-outline(0);
+      }
+
+      &.active {
+        font-weight: 600;
+        cursor: default;
+      }
+    }
+
+    &.disabled {
+      color: colors.$grayscale-4;
+      cursor: default;
+    }
+
+    p {
+      &::before {
+        content: attr(content);
+        height: 0;
+        display: block;
+        font-weight: 600;
+        text-wrap: nowrap;
+        visibility: hidden;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .indicator {
+    height: 2px;
+    bottom: 0;
+    background: colors.$blue-5;
+  }
+}

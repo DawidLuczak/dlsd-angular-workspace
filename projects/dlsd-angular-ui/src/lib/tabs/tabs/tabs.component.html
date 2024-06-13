@@ -1,0 +1,35 @@
+<div
+  class="{{ size() }}"
+  [ngClass]="[type() === TabsType.TABS ? 'tabs' : 'submenu']"
+  #containerRef
+>
+  @for (tab of tabs(); track tab.value) {
+  <button
+    *ngLet="$index === activeTabIndex() as isActiveTab"
+    class="tab"
+    [ngClass]="{
+      active: isActiveTab,
+      disabled: tab.disabled,
+      icon: $any(tab).icon
+    }"
+    type="button"
+    [tabIndex]="tab.disabled ? -1 : 0"
+    (keydown.space)="changeActiveTab($index)"
+    (click)="changeActiveTab($index)"
+    #tabRef
+  >
+    <p [attr.content]="$any(tab).name">{{ $any(tab).name }}</p>
+
+    @if ($any(tab).count != null) {
+    <dlsd-number-label
+      type="white"
+      [value]="$any(tab).count"
+      [active]="isActiveTab"
+      [disabled]="tab.disabled"
+    ></dlsd-number-label>
+    }
+  </button>
+  }
+
+  <div class="indicator" #indicatorRef></div>
+</div>
