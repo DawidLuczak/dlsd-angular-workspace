@@ -1,0 +1,119 @@
+<div class="page-items">
+  <dlsd-select
+    [formControl]="limitFormControl"
+    size="s"
+    width="56px"
+    [options]="LIMIT_OPTIONS"
+    [optional]="false"
+    [optionTemplateRef]="selectOptionTemplateRef"
+  >
+    <ng-template let-option #selectOptionTemplateRef>
+      {{ option.value }}
+    </ng-template>
+  </dlsd-select>
+
+  @if (totalItems() > 0) {
+  <p class="f-regular-1">
+    {{
+      I18N + ".pageItems"
+        | translate
+          : {
+              pageItems: pageItemsTranslationParam(),
+              totalItems: totalItems()
+            }
+    }}
+  </p>
+  }
+</div>
+
+<div *ngLet="pagination() as pagination" class="page-buttons">
+  <!-- <onyx-icon
+    class="page-button"
+    [ngClass]="{ disabled: pagination.page === 1 }"
+    [tabIndex]="pagination.page === 1 ? -1 : 0"
+    category="arrow"
+    name="arrow-alt"
+    type="left"
+    [size]="16"
+    (click)="previousPage()"
+    (keydown.space)="previousPage(); $event.preventDefault()"
+  ></onyx-icon> -->
+
+  <div *ngLet="totalPages() as totalPages" class="pages f-regular-1">
+    @if (totalPages.length > 5) { @if (pagination.page > 1) { @if
+    (pagination.page > 2) {
+    <button class="page-button page-number-button" (click)="changePage(1)">
+      1
+    </button>
+    } @if (pagination.page > 3) {
+    <div class="page-numbers-hidden">...</div>
+    } @if (pagination.page === totalPages.length) {
+    <button
+      class="page-button page-number-button"
+      (click)="changePage(pagination.page - 2)"
+    >
+      {{ pagination.page - 2 }}
+    </button>
+    }
+
+    <button
+      class="page-button page-number-button"
+      (click)="changePage(pagination.page - 1)"
+    >
+      {{ pagination.page - 1 }}
+    </button>
+    }
+
+    <button class="page-button page-number-button active">
+      {{ pagination.page }}
+    </button>
+
+    @if (pagination.page < totalPages.length) {
+    <button
+      class="page-button page-number-button"
+      (click)="changePage(pagination.page + 1)"
+    >
+      {{ pagination.page + 1 }}
+    </button>
+
+    @if (pagination.page === 1) {
+    <button
+      class="page-button page-number-button"
+      (click)="changePage(pagination.page + 2)"
+    >
+      {{ pagination.page + 2 }}
+    </button>
+    } @if (pagination.page < totalPages.length - 2) {
+    <div class="page-numbers-hidden">...</div>
+    } @if (pagination.page < totalPages.length - 1) {
+    <button
+      class="page-button page-number-button"
+      (click)="changePage(totalPages.length)"
+    >
+      {{ totalPages.length }}
+    </button>
+    } } } @else { @for (pageNumber of totalPages; track pageNumber) {
+    <button
+      class="page-button page-number-button"
+      [ngClass]="{ active: pagination.page === pageNumber }"
+      (click)="pagination.page !== pageNumber ? changePage(pageNumber) : null"
+    >
+      <p>{{ pageNumber }}</p>
+    </button>
+    } }
+  </div>
+
+  <!-- <onyx-icon
+    class="page-button"
+    [ngClass]="{
+      disabled: pagination.page === totalPages().length || !totalPages().length
+    }"
+    [tabIndex]="pagination.page === totalPages().length ? -1 : 0"
+    category="arrow"
+    name="arrow-alt"
+    type="right"
+    [size]="16"
+    (click)="nextPage()"
+    (keydown.space)="nextPage(); $event.preventDefault()"
+  ></onyx-icon> -->
+</div>

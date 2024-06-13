@@ -1,0 +1,81 @@
+@use "colors";
+
+:host {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.page-items {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 16px;
+
+  p {
+    color: colors.$grayscale-5;
+  }
+}
+
+.page-buttons {
+  display: flex;
+  justify-content: right;
+  gap: 8px;
+
+  .pages {
+    display: flex;
+  }
+
+  .page-button {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    background: colors.$grayscale-0;
+    border-color: colors.$grayscale-0;
+    color: colors.$grayscale-9;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    transition: none 300ms ease;
+    transition-property: background, color, border-color;
+
+    &.active {
+      background: colors.$blue-5;
+      color: colors.$grayscale-0;
+      cursor: default;
+    }
+
+    &.disabled {
+      color: colors.$grayscale-4;
+      cursor: default;
+    }
+
+    &:not(.disabled):not(.active) {
+      &:hover {
+        background: colors.$grayscale-1;
+        color: colors.$grayscale-9;
+      }
+
+      &:focus-visible {
+        border: 2px solid colors.$blue-5;
+      }
+
+      &:active {
+        background: colors.$grayscale-2;
+      }
+    }
+  }
+
+  .page-numbers-hidden {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    user-select: none;
+  }
+}

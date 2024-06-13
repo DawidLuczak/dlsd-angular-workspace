@@ -25,6 +25,9 @@
         "dec": "grudzień"
       }
     },
+    "pagination": {
+      "pageItems": "{{pageItems}} z {{totalItems}}"
+    },
     "select": {
       "choose": "wybierz",
       "search": "szukaj"
