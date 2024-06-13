@@ -1,0 +1,12 @@
+@use "variables";
+
+:host {
+  max-width: calc(100vw - 8px);
+  z-index: variables.$z-index-toasts;
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}

@@ -3,6 +3,7 @@ import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { FormsComponent } from './forms/forms.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ToastsComponent } from './toasts/toasts.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 
 export const routes: Routes = [
@@ -25,6 +26,11 @@ export const routes: Routes = [
     title: 'tabs',
     component: TabsComponent,
     path: 'tabs',
+  },
+  {
+    title: 'toasts',
+    component: ToastsComponent,
+    path: 'toasts',
   },
   {
     title: 'tooltips',

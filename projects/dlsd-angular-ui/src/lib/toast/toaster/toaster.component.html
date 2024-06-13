@@ -1,0 +1,8 @@
+@for (toast of config.toasts(); track toast) {
+<dlsd-toast
+  [color]="toast.color"
+  [message]="toast.message"
+  [forceClose]="$index > 2"
+  (closeToast)="config.hideToast(toast)"
+></dlsd-toast>
+}
