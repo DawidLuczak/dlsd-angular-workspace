@@ -4,9 +4,9 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { DatepickerDateRange } from '../interfaces';
+import { DLSDDatepickerDateRange } from '../interfaces';
 
-export const dateRangeValidator: ValidatorFn = (
+export const dlsdDateRangeValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   if (!control.value) {
@@ -15,7 +15,7 @@ export const dateRangeValidator: ValidatorFn = (
       : null;
   }
 
-  const { from, to } = control.value as DatepickerDateRange;
+  const { from, to } = control.value as DLSDDatepickerDateRange;
   if (!from || !to) {
     return control.hasValidator(Validators.required)
       ? { required: true }

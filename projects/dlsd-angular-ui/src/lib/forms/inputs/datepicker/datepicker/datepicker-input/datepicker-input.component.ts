@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { NgLetModule } from 'ng-let';
-import { DLSDClearButtonComponent } from '../../../../buttons';
-import { DLSDFormControlErrorComponent } from '../../../../internal/form-control-error/form-control-error.component';
+import { DLSDClearButtonComponent } from '../../../../../buttons';
+import { DLSDFormControlErrorComponent } from '../../../../controls';
 
 const INTEGER_REGEXP = /^\d+$/;
 const DATE_REGEXP = /20[0-9]{2}-[0-1][0-9]-[0-3][0-9]/;

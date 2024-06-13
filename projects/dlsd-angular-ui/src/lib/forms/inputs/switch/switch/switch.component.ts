@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels';
 
 @Component({
@@ -29,7 +29,7 @@ import { DLSDInputLabelComponent } from '../../../labels';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DLSDSwitchComponent
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor
 {
   public value = model<boolean>(false);

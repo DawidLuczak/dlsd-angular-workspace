@@ -14,8 +14,8 @@ import {
   FormsModule,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { BaseFormControlComponent } from '../../internal/base-form-control/base-form-control.component';
-import { DLSDInputLabelComponent } from '../../labels';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
+import { DLSDInputLabelComponent } from '../../../labels';
 
 @Component({
   selector: 'dlsd-checkbox',
@@ -33,7 +33,7 @@ import { DLSDInputLabelComponent } from '../../labels';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DLSDCheckboxComponent
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor
 {
   public value = model<boolean>(false);

@@ -49,7 +49,7 @@
     "
     [textsOverflowElementRef]="selectRef()"
     (focus)="$event.stopPropagation()"
-    (click)="selectElementRef.focus()"
+    (click)="focusSearchInput()"
     (input)="changeInput($event)"
     (keydown.backspace)="backspaceInput($event)"
     (keydown.control.backspace)="clearValue()"

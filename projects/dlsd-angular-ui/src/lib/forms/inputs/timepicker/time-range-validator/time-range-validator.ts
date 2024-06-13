@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { TimepickerTimeRange } from '../interfaces';
 
-export const timeRangeValidator: ValidatorFn = (
+export const dlsdTimeRangeValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   if (!control.value) {

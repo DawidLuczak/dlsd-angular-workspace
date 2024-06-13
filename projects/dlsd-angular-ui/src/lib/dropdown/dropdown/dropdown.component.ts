@@ -28,15 +28,15 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { HighlightPipe } from '../../pipes/highlight/highlight.pipe';
+import { DLSDHighlightPipe } from '../../pipes/highlight/highlight.pipe';
 import {
-  DropdownConfig,
-  DropdownOption,
-  DropdownOptionsGroup,
-  DropdownSourceOptions,
+  DLSDDropdownConfig,
+  DLSDDropdownOption,
+  DLSDDropdownOptionsGroup,
+  DLSDDropdownSourceOptions,
 } from '../dropdown-interfaces';
 
-export const DROPDOWN_CONFIG = new InjectionToken<DropdownConfig<any>>(
+export const DROPDOWN_CONFIG = new InjectionToken<DLSDDropdownConfig<any>>(
   'Options to display in a dropdown'
 );
 
@@ -50,7 +50,7 @@ export const DROPDOWN_CONFIG = new InjectionToken<DropdownConfig<any>>(
     CdkDragPreview,
     NgClass,
     NgTemplateOutlet,
-    HighlightPipe,
+    DLSDHighlightPipe,
     ReactiveFormsModule,
   ],
   templateUrl: './dropdown.component.html',
@@ -59,8 +59,10 @@ export const DROPDOWN_CONFIG = new InjectionToken<DropdownConfig<any>>(
 export class DropdownComponent<T> implements OnInit, AfterViewInit {
   @HostBinding('style.width.px') public width?: number;
 
-  protected options = signal<DropdownOptionsGroup<T>[] | null | undefined>([]);
-  protected value = signal<DropdownOption<T>[]>([]);
+  protected options = signal<DLSDDropdownOptionsGroup<T>[] | null | undefined>(
+    []
+  );
+  protected value = signal<DLSDDropdownOption<T>[]>([]);
   protected query = signal<string | undefined>(undefined);
   protected selectedAll = signal<boolean>(false);
   protected optionDragIndicator = signal<number | null>(null);
@@ -76,19 +78,20 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
           return previous;
         },
         {
-          disabled: [] as DropdownOption<T>[],
-          enabled: [] as DropdownOption<T>[],
+          disabled: [] as DLSDDropdownOption<T>[],
+          enabled: [] as DLSDDropdownOption<T>[],
         }
       ),
       headerTemplateRef: optionsGroup.headerTemplateRef,
     }))
   );
 
-  protected optionRefs = viewChildren<CdkOption<DropdownOption<T>>>(CdkOption);
+  protected optionRefs =
+    viewChildren<CdkOption<DLSDDropdownOption<T>>>(CdkOption);
   private focusedOptionIndex = signal<number | undefined>(undefined);
 
   constructor(
-    @Inject(DROPDOWN_CONFIG) protected config: DropdownConfig<T>,
+    @Inject(DROPDOWN_CONFIG) protected config: DLSDDropdownConfig<T>,
     private destroyRef: DestroyRef
   ) {
     this.width = config.width;
@@ -143,7 +146,7 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
   }
 
   protected changeOptions(
-    listboxEventValue: ListboxValueChangeEvent<DropdownOption<T>>
+    listboxEventValue: ListboxValueChangeEvent<DLSDDropdownOption<T>>
   ): void {
     if (!listboxEventValue.option?.value) {
       if (listboxEventValue.option?.value === null) {
@@ -164,7 +167,7 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
     });
   }
 
-  protected unselectOption(option: DropdownOption<T>): void {
+  protected unselectOption(option: DLSDDropdownOption<T>): void {
     if (!(this.config.optional && !this.config.multiple && option.selected)) {
       return;
     }
@@ -178,8 +181,8 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
   protected dropDragOption(
     event: CdkDragDrop<{ title: string; poster: string }[]>,
     optionsGroup: {
-      disabled: DropdownOption<T>[];
-      enabled: DropdownOption<T>[];
+      disabled: DLSDDropdownOption<T>[];
+      enabled: DLSDDropdownOption<T>[];
     },
     optionIndex: number
   ): void {
@@ -215,7 +218,7 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
     this.optionDragIndicator.set(i);
   }
 
-  private isAllSelected(options: DropdownOption<T>[] | undefined): boolean {
+  private isAllSelected(options: DLSDDropdownOption<T>[] | undefined): boolean {
     if (!options) return false;
 
     return !options.some((option) => !option.selected);
@@ -224,7 +227,7 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
   private selectAll(isAllSelected: boolean): void {
     const options = this.options()!;
     const flattenedOptions = this.reduceOptionsGroup(options);
-    const disabledOptions: DropdownOption<T>[] = flattenedOptions.filter(
+    const disabledOptions: DLSDDropdownOption<T>[] = flattenedOptions.filter(
       (option) => option.disabled
     );
 
@@ -257,7 +260,7 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
     }
   }
 
-  private setOptionsFromSource(options: DropdownSourceOptions<T>): void {
+  private setOptionsFromSource(options: DLSDDropdownSourceOptions<T>): void {
     if (options.options?.length) {
       this.options.set(
         this.config.multiple
@@ -276,8 +279,8 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
   }
 
   private sortOptions(
-    optionsGroups: DropdownOptionsGroup<T>[]
-  ): DropdownOptionsGroup<T>[] {
+    optionsGroups: DLSDDropdownOptionsGroup<T>[]
+  ): DLSDDropdownOptionsGroup<T>[] {
     return optionsGroups.map((optionsGroup) => {
       const options = optionsGroup.options.reduce(
         (previous, current) => {
@@ -289,8 +292,8 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
           return previous;
         },
         {
-          selected: [] as DropdownOption<T>[],
-          other: [] as DropdownOption<T>[],
+          selected: [] as DLSDDropdownOption<T>[],
+          other: [] as DLSDDropdownOption<T>[],
         }
       );
       return {
@@ -309,11 +312,11 @@ export class DropdownComponent<T> implements OnInit, AfterViewInit {
   }
 
   private reduceOptionsGroup(
-    arrayGroups: DropdownOptionsGroup<T>[]
-  ): DropdownOption<T>[] {
+    arrayGroups: DLSDDropdownOptionsGroup<T>[]
+  ): DLSDDropdownOption<T>[] {
     return arrayGroups.reduce(
       (previous, current) => previous.concat(current.options),
-      [] as DropdownOption<T>[]
+      [] as DLSDDropdownOption<T>[]
     );
   }
 }

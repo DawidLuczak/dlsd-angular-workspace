@@ -2,62 +2,58 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomOverlayConfig } from '../overlay/interfaces';
+import { DLSDCustomOverlayConfig } from '../overlay/interfaces';
 
-export interface DropdownConfig<T> extends CustomOverlayConfig {
+export interface DLSDDropdownConfig<T> extends DLSDCustomOverlayConfig {
   clearValue?: () => void;
   close: () => void;
-  // focusSourceElement?: () => void;
-  // footerOption?: DropdownOption<T>;
-  // footerTemplateRef?: TemplateRef<unknown>;
-  // headerTemplateRef?: TemplateRef<unknown>;
   multiple?: boolean;
   noResultsMessage?: string;
   optional?: boolean;
-  options: DropdownOptions<T>;
+  options: DLSDDropdownOptions<T>;
   optionsDraggable?: boolean;
   optionTemplateRef?: TemplateRef<unknown>;
   onOptionDrag?: (
     event: CdkDragDrop<{ title: string; poster: string }[]>
   ) => void;
   onValueChange: (
-    value: DropdownOption<T>,
-    options: DropdownOption<T>[]
+    value: DLSDDropdownOption<T>,
+    options: DLSDDropdownOption<T>[]
   ) => void;
   search?: boolean;
   title?: string;
   width?: number;
 }
 
-export type DropdownOptions<T> =
-  | Observable<DropdownSourceOptions<T>>
-  | DropdownOptionsGroup<T>[]
+export type DLSDDropdownOptions<T> =
+  | Observable<DLSDDropdownSourceOptions<T>>
+  | DLSDDropdownOptionsGroup<T>[]
   | undefined;
 
-export interface DropdownSourceOptions<T> {
-  options: DropdownOptionsGroup<T>[] | null;
+export interface DLSDDropdownSourceOptions<T> {
+  options: DLSDDropdownOptionsGroup<T>[] | null;
   query?: string;
 }
 
-export interface DropdownOptionsGroup<T> {
+export interface DLSDDropdownOptionsGroup<T> {
   headerTemplateRef?: TemplateRef<unknown>;
-  options: DropdownOption<T>[];
+  options: DLSDDropdownOption<T>[];
 }
 
-export interface DropdownOption<T> extends Option<T> {
+export interface DLSDDropdownOption<T> extends DLSDOption<T> {
   selected?: boolean;
   disabled?: boolean;
-  options?: DropdownOption<T>[];
+  options?: DLSDDropdownOption<T>[];
 }
 
-export interface Option<T> {
+export interface DLSDOption<T> {
   name: string;
   value: T;
 }
 
-export type CallbackOption = Option<() => void>;
+export type DLSDCallbackOption = DLSDOption<() => void>;
 
-export interface DropdownOverlayConfig {
+export interface DLSDDropdownOverlayConfig {
   overlayRef: OverlayRef;
   intersectionObserver?: IntersectionObserver;
 }

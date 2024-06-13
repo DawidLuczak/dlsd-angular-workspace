@@ -14,7 +14,7 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { BaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
+import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels';
 
 @Component({
@@ -33,7 +33,7 @@ import { DLSDInputLabelComponent } from '../../../labels';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DLSDRadioButtonComponent<T>
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor, OnInit
 {
   public option = input.required<T>();

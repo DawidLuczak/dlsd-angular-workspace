@@ -22,11 +22,11 @@ import {
 } from 'rxjs';
 import { OverlayPosition } from '../../overlay/overlay-positions';
 import {
-  DropdownConfig,
-  DropdownOption,
-  DropdownOptions,
+  DLSDDropdownConfig,
+  DLSDDropdownOption,
+  DLSDDropdownOptions,
 } from '../dropdown-interfaces';
-import { DropdownService } from '../dropdown-service/dropdown.service';
+import { DLSDDropdownService } from '../dropdown-service/dropdown.service';
 import {
   DROPDOWN_CONFIG,
   DropdownComponent,
@@ -36,13 +36,13 @@ import {
   selector: '[dlsdDropdownOptions]',
   standalone: true,
 })
-export class DropdownDirective<T> implements OnInit {
-  public dropdownOptions = input.required<DropdownOptions<T>>({
+export class DLSDDropdownDirective<T> implements OnInit {
+  public dropdownOptions = input.required<DLSDDropdownOptions<T>>({
     alias: 'dlsdDropdownOptions',
   });
   public dropdownOptionTemplateRef = input<TemplateRef<unknown>>();
   public dropdownDisabled = input<boolean>();
-  public dropdownHostCss = input<DropdownConfig<T>['hostCss']>(['fill']);
+  public dropdownHostCss = input<DLSDDropdownConfig<T>['hostCss']>(['fill']);
   public dropdownMultiple = input<boolean>();
   public dropdownInheritWidth = input<boolean>();
   public dropdownNoResultsMessage = input<string>();
@@ -59,8 +59,8 @@ export class DropdownDirective<T> implements OnInit {
   public dropdownAttached = model<boolean>(false);
 
   public dropdownValueChange = output<{
-    value: DropdownOption<T>;
-    options: DropdownOption<T>[];
+    value: DLSDDropdownOption<T>;
+    options: DLSDDropdownOption<T>[];
   }>();
   public dropdownOptionAdd = output();
   public dropdownClearValue = output();
@@ -70,7 +70,7 @@ export class DropdownDirective<T> implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private viewContainerRef: ViewContainerRef,
-    private dropdownService: DropdownService,
+    private dropdownService: DLSDDropdownService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -158,8 +158,8 @@ export class DropdownDirective<T> implements OnInit {
           event: CdkDragDrop<{ title: string; poster: string }[]>
         ) => this.dropdownOptionDrag.emit(event),
         onValueChange: (
-          value: DropdownOption<T>,
-          options: DropdownOption<T>[]
+          value: DLSDDropdownOption<T>,
+          options: DLSDDropdownOption<T>[]
         ) => {
           this.dropdownValueChange.emit({ value, options });
           if (!!this.dropdownMultiple() || value.options?.length) {

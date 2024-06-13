@@ -1,6 +1,6 @@
-import { Option } from '../dropdown/index';
+import { DLSDOption } from '../dropdown/index';
 
-export const PAGINATION_LIMIT_OPTIONS: Option<number>[] = [
+export const PAGINATION_LIMIT_OPTIONS: DLSDOption<number>[] = [
   { name: '20', value: 20 },
   { name: '30', value: 30 },
   { name: '40', value: 40 },

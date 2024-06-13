@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DLSDTimepickerComponent } from '../../../../../../dlsd-angular-ui/src/lib/inputs/timepicker';
+import { DLSDTimepickerComponent } from '../../../../../../dlsd-angular-ui/src/public-api';
 
 @Component({
   selector: 'app-timepicker',

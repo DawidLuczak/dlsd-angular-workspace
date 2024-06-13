@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DLSDSelectComponent } from '../../../../../../dlsd-angular-ui/src/lib/inputs';
+import { DLSDSelectComponent } from '../../../../../../dlsd-angular-ui/src/public-api';
 
 @Component({
   selector: 'app-select',

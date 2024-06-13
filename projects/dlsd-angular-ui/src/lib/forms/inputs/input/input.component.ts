@@ -15,9 +15,9 @@ import {
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DLSDClearButtonComponent } from '../../buttons';
-import { BaseFormControlComponent } from '../../internal/base-form-control/base-form-control.component';
-import { DLSDFormControlErrorComponent } from '../../internal/form-control-error/form-control-error.component';
+import { DLSDClearButtonComponent } from '../../../buttons';
+import { DLSDFormControlErrorComponent } from '../../controls';
+import { DLSDBaseFormControlComponent } from '../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../labels';
 
 const INTEGER_REGEXP = /^\d+$/;
@@ -44,7 +44,7 @@ const FLOAT_REGEXP = /^\d+[,.]?\d{0,2}$/;
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DLSDInputComponent<T>
-  extends BaseFormControlComponent
+  extends DLSDBaseFormControlComponent
   implements ControlValueAccessor
 {
   @HostBinding('style.width') @Input() public width = '100%';
@@ -126,27 +126,24 @@ export class DLSDInputComponent<T>
   protected validateInput(event: KeyboardEvent): boolean {
     if (!(this.integer() || this.float())) return true;
 
-    const target = event.target as HTMLInputElement;
-    const { value, selectionStart, selectionEnd } = target;
-
+    const { value, selectionStart, selectionEnd } =
+      event.target as HTMLInputElement;
     const newValue =
       value.slice(0, selectionStart!) + event.key + value.slice(selectionEnd!);
 
     const pattern = this.integer() ? INTEGER_REGEXP : FLOAT_REGEXP;
-    if (!pattern.test(newValue)) {
-      event.preventDefault();
-      return false;
-    }
-    return true;
+    if (pattern.test(newValue)) return true;
+
+    event.preventDefault();
+    return false;
   }
 
   protected validatePaste(event: ClipboardEvent): boolean {
     if (!(this.integer() || this.float())) return true;
 
-    const target = event.target as HTMLInputElement;
-    const { value, selectionStart, selectionEnd } = target;
+    const { value, selectionStart, selectionEnd } =
+      event.target as HTMLInputElement;
     const pasteData = event.clipboardData?.getData('text') ?? '';
-
     const newValue =
       value.slice(0, selectionStart!) + pasteData + value.slice(selectionEnd!);
 

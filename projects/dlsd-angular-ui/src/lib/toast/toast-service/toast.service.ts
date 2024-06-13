@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { distinctUntilChanged, map } from 'rxjs';
 import { I18N_NAMESPACE } from '../../internal/constants';
-import { OverlayService } from '../../overlay/overlay-service/overlay.service';
+import { DLSDOverlayService } from '../../overlay/overlay-service/overlay.service';
 import { DEFAULT_TOAST_COLORS } from '../constants';
 import { DLSDToastColor, DLSDToastType } from '../enums';
 import { DLSDToast } from '../interfaces';
@@ -19,7 +19,7 @@ type DLSDToastOverride = Partial<Omit<DLSDToast, 'color' | 'message'>>;
 @Injectable({
   providedIn: 'root',
 })
-export class DLSDToastService extends OverlayService {
+export class DLSDToastService extends DLSDOverlayService {
   private toasts = signal<DLSDToast[]>([]);
 
   private routeChange$ = this.router.events.pipe(
