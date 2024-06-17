@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { FormsComponent } from './forms/forms.component';
+import { formsRoutes } from './forms/forms.routes';
 import { PaginationComponent } from './pagination/pagination.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ToastsComponent } from './toasts/toasts.component';
@@ -16,6 +17,7 @@ export const routes: Routes = [
     title: 'forms',
     component: FormsComponent,
     path: 'forms',
+    children: formsRoutes,
   },
   {
     title: 'pagination',
