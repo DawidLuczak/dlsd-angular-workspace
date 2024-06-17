@@ -16,7 +16,8 @@ registerLocaleData(localePl);
 
 export const createTranslateLoader = (http: HttpBackend) =>
   new MultiTranslateHttpLoader(http, [
-    { prefix: '/assets/i18n/', suffix: '.json' },
+    { prefix: './assets/i18n/' },
+    { prefix: './assets/i18n/dlsd-angular-ui/' },
   ]);
 
 export const appConfig: ApplicationConfig = {

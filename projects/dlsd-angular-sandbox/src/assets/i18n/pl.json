@@ -1,0 +1,8 @@
+{
+  "dlsdAngularSandbox": {
+    "view": {
+      "components": "Widok wszystkich komponentów",
+      "router": "Widok wybranego komponentu"
+    }
+  }
+}
