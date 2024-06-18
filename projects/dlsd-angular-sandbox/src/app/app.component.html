@@ -1,24 +1,35 @@
+<header>
+  <dlsd-switch
+    [label]="
+      I18N +
+        (view() === View.ROUTER_OUTLET ? '.view.router' : '.view.components')
+        | translate
+    "
+    [value]="view() === View.ROUTER_OUTLET"
+    (valueChange)="changeView($event)"
+  ></dlsd-switch>
+</header>
+
 <nav>
   <ul>
     @for (route of ROUTES; track route) {
-    <li
-      class="f-paragraph-regular-2"
-      [ngClass]="{ active: route === activeSection() }"
-      [tabindex]="-1"
-      (click)="changeSection(route)"
-      (keydown.space)="changeSection(route)"
-    >
-      {{ route.title }}
-    </li>
+    <dlsd-nav-item
+      [route]="route"
+      [activeRoutesTree]="activeRouteTree()"
+      (activate)="navigateTo($event)"
+    ></dlsd-nav-item>
     }
   </ul>
 </nav>
 
-<main #container>
-  @for (route of ROUTES; track route.title) {
+<main [ngClass]="{ components: view() === View.COMPONENT_OUTLETS }" #container>
+  @if (view() === View.COMPONENT_OUTLETS) { @for (route of ROUTES; track
+  route.title) {
   <ng-container *ngComponentOutlet="route.component!"></ng-container>
 
   @if (!$last) {
   <div class="separator"></div>
-  } }
+  } } } @else {
+  <router-outlet></router-outlet>
+  }
 </main>
