@@ -62,17 +62,9 @@ main {
   grid-area: main;
   display: flex;
   flex-direction: column;
-  padding: 16px;
   overflow: auto;
 
-  &.components {
-    gap: 32px;
-  }
-
-  .separator {
-    height: 1px;
-    width: 100%;
-    border-top: 1px solid rgba(gray, 0.5);
-    margin-top: 16px;
+  .router {
+    padding: 16px;
   }
 }
