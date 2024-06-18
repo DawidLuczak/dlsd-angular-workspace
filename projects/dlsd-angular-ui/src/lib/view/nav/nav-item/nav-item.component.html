@@ -1,0 +1,21 @@
+<li
+  [ngClass]="{ active: activeRoutesTree()?.routesTree?.route === route() }"
+  [tabindex]="-1"
+  (click)="this.activateChildRoute({ route: route() })"
+>
+  @if (type() === NavItemType.TITLE) {
+  {{ route().title }}
+  }
+</li>
+@if (activeRoutesTree()?.routesTree?.route === route() &&
+route().children?.length) {
+<ul>
+  @for (childRoute of route().children; track childRoute) {
+  <dlsd-nav-item
+    [route]="childRoute"
+    [activeRoutesTree]="activeRoutesTree()?.routesTree"
+    (activate)="activateChildRoute($event)"
+  ></dlsd-nav-item>
+  }
+</ul>
+}

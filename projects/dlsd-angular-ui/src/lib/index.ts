@@ -5,3 +5,4 @@ export * from './pagination/index';
 export * from './tabs/index';
 export * from './toast/index';
 export * from './tooltip/index';
+export * from './view/index';

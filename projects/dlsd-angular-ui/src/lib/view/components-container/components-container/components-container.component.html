@@ -1,0 +1,9 @@
+@for (route of routes(); track route) {
+<ng-container
+  #componentRef
+  *ngComponentOutlet="route.component!"
+></ng-container>
+
+@if (!$last) {
+<div class="separator"></div>
+} }

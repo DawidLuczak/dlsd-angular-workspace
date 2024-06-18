@@ -1,76 +1,81 @@
 import { NgClass, NgComponentOutlet } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  HostListener,
   signal,
   viewChild,
 } from '@angular/core';
-import { Route, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import {
+  DLSDActiveRoutesTree,
+  DLSDComponentsContainerComponent,
+  DLSDNavItemComponent,
+  DLSDSwitchComponent,
+} from '../../../dlsd-angular-ui/src/lib';
 import { routes } from './app.routes';
+
+enum View {
+  ROUTER_OUTLET,
+  COMPONENT_OUTLETS,
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgClass, NgComponentOutlet],
+  imports: [
+    RouterOutlet,
+    NgClass,
+    NgComponentOutlet,
+    DLSDSwitchComponent,
+    DLSDNavItemComponent,
+    DLSDComponentsContainerComponent,
+    TranslateModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  readonly Object = Object;
-  readonly ROUTES = routes;
+  protected readonly View = View;
+  protected readonly I18N = 'dlsdAngularSandbox';
 
-  private readonly SCROLL_PADDING = 32;
+  protected routes = signal(routes);
+  protected activeRouteTree = signal<DLSDActiveRoutesTree>({
+    route: this.routes()[0],
+  });
+  protected view = signal(View.COMPONENT_OUTLETS);
 
-  protected activeSection = signal(this.ROUTES[0]);
-
-  private containerRef =
-    viewChild.required<ElementRef<HTMLElement>>('container');
-
-  @HostListener('window:scroll')
-  public updateActiveSection(): void {
-    const sections = this.getSections();
-
-    for (const section of sections) {
-      const sectionTop = section.offsetTop - this.SCROLL_PADDING;
-      const sectionBottom =
-        section.offsetTop + section.offsetHeight + this.SCROLL_PADDING;
-      if (window.scrollY < sectionTop || window.scrollY > sectionBottom) return;
-
-      const activeSection = this.ROUTES.find(
-        (route) =>
-          route.title?.toString().toLocaleLowerCase() ===
-          section.localName.split('-').slice(1).join('-')
-      );
-      if (!activeSection) return;
-
-      this.activeSection.set(activeSection);
-    }
-  }
-
-  protected changeSection(route: Route): void {
-    const sections = this.getSections();
-    const section = sections.find(
-      (section) =>
-        section.localName.split('-').slice(1).join('-') ===
-        route.title?.toString().toLowerCase()
+  private componentsContainerRef =
+    viewChild.required<DLSDComponentsContainerComponent>(
+      DLSDComponentsContainerComponent
     );
-    if (!section) return;
 
-    window.scrollTo({
-      top: section.offsetTop - this.SCROLL_PADDING,
-      behavior: 'smooth',
-    });
+  constructor(private router: Router) {}
+
+  protected changeView(flag: boolean): void {
+    this.view.set(flag ? View.ROUTER_OUTLET : View.COMPONENT_OUTLETS);
+    if (this.view() !== View.ROUTER_OUTLET) return;
+
+    this.router.navigate([`/${this.activeRouteTree().route.path}`]);
   }
 
-  private getSections(): HTMLElement[] {
-    const sectionRefs = Array.from(this.containerRef().nativeElement.children);
-    const sections = [];
+  protected navigateTo(activeRoute: DLSDActiveRoutesTree): void {
+    this.view()
+      ? this.componentsContainerRef().changeSection(activeRoute.route)
+      : this.navigateRouter(activeRoute);
 
-    for (const section of sectionRefs) {
-      if (section.classList.contains('separator')) continue;
-      sections.push(section as HTMLElement);
-    }
-    return sections;
+    this.activeRouteTree.set(activeRoute);
+  }
+
+  private navigateRouter(activeRoute: DLSDActiveRoutesTree): void {
+    let routeTree = activeRoute.routesTree;
+    let path = '/';
+    do {
+      path += `/${routeTree?.route.path}`;
+      routeTree = routeTree?.routesTree;
+    } while (routeTree);
+
+    this.router.navigate([path]);
   }
 }
