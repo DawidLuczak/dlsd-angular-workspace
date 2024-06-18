@@ -1,5 +1,10 @@
 <li
-  [ngClass]="{ active: activeRoutesTree()?.routesTree?.route === route() }"
+  [ngClass]="{
+    active: activeRoutesTree().route === route(),
+    expanded:
+      activeRoutesTree().routesTree?.route === route() &&
+      activeRoutesTree().route !== route()
+  }"
   [tabindex]="-1"
   (click)="this.activateChildRoute({ route: route() })"
 >
@@ -7,13 +12,16 @@
   {{ route().title }}
   }
 </li>
-@if (activeRoutesTree()?.routesTree?.route === route() &&
+@if (activeRoutesTree().routesTree?.route === route() &&
 route().children?.length) {
 <ul>
   @for (childRoute of route().children; track childRoute) {
   <dlsd-nav-item
     [route]="childRoute"
-    [activeRoutesTree]="activeRoutesTree()?.routesTree"
+    [activeRoutesTree]="{
+      route: activeRoutesTree()!.route,
+      routesTree: activeRoutesTree().routesTree?.routesTree
+    }"
     (activate)="activateChildRoute($event)"
   ></dlsd-nav-item>
   }
