@@ -1,15 +1,24 @@
 :host {
+  min-height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
   padding: 16px;
   overflow: auto;
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+dlsd-components-container {
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden !important;
 }
 
 .separator {
   height: 1px;
   width: 100%;
   border-top: 1px solid rgba(gray, 0.5);
-  margin-top: 16px;
+  margin: 32px 0;
 }

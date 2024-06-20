@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DLSDDropdownDirective } from '../../../../dlsd-angular-ui/src/lib';
-import { DLSDDropdownOption } from '../../../../dlsd-angular-ui/src/lib/dropdown/dropdown-interfaces';
+import { DLSDDropdownDirective } from '../../../../../dlsd-angular-ui/src/lib';
+import { DLSDDropdownOption } from '../../../../../dlsd-angular-ui/src/lib/dropdown/dropdown-interfaces';
 
 @Component({
   selector: 'app-dropdowns',

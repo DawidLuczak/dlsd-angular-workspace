@@ -1,9 +1,14 @@
-@for (route of routes(); track route) {
+@for (route of routes(); track route) { @if (route.children?.length) {
+<h2>{{ route.title }}</h2>
+
+<dlsd-components-container
+  [routes]="route.children!"
+></dlsd-components-container>
+} @else {
 <ng-container
   #componentRef
   *ngComponentOutlet="route.component!"
 ></ng-container>
-
-@if (!$last) {
+} @if (!$last) {
 <div class="separator"></div>
 } }

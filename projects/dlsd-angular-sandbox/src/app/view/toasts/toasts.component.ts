@@ -3,7 +3,7 @@ import {
   DLSDButtonComponent,
   DLSDToastService,
   DLSDToastType,
-} from '../../../../dlsd-angular-ui/src/public-api';
+} from '../../../../../dlsd-angular-ui/src/public-api';
 
 @Component({
   selector: 'app-toasts',

@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { InputsComponent } from './inputs/inputs.component';
+import { controlsRoutes } from './controls/controls.routes';
+import { FormsComponent } from './forms.component';
 import { inputsRoutes } from './inputs/inputs.routes';
 
 export const formsRoutes: Routes = [
   {
-    title: 'inputs',
-    component: InputsComponent,
-    path: 'inputs',
-    children: inputsRoutes,
+    title: 'forms',
+    component: FormsComponent,
+    path: 'forms',
+    children: [...inputsRoutes, ...controlsRoutes],
   },
 ];

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TooltipDirective } from '../../../../dlsd-angular-ui/src/lib/tooltip';
+import { TooltipDirective } from '../../../../../dlsd-angular-ui/src/lib/tooltip';
 
 @Component({
   selector: 'app-tooltips',
