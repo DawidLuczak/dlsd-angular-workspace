@@ -21,7 +21,7 @@ export class DLSDNavItemComponent {
   protected readonly NavItemType = NavItemType;
 
   public route = input.required<Route>();
-  public activeRoutesTree = input<DLSDActiveRoutesTree>();
+  public activeRoutesTree = input.required<DLSDActiveRoutesTree>();
   public type = input(NavItemType.TITLE);
 
   public activate = output<DLSDActiveRoutesTree>();

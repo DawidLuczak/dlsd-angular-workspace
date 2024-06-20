@@ -1,0 +1,13 @@
+<h2>Icons</h2>
+
+<div class="container">
+  @for (iconCategory of Object.entries(ICONS); track $index) { @for (iconName of
+  Object.entries(iconCategory[1]); track $index) { @for (iconSize of
+  iconName[1]; track $index) {
+  <dlsd-icon
+    [category]="$any(iconCategory[0])"
+    [name]="$any(iconName[0])"
+    [size]="iconSize"
+  ></dlsd-icon>
+  } } }
+</div>

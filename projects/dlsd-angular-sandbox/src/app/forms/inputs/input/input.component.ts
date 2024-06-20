@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { DLSDInputComponent } from '../../../../../../dlsd-angular-ui/src/public-api';
+import {
+  DLSDElementOptionShortcutsDirective,
+  DLSDInputComponent,
+} from '../../../../../../dlsd-angular-ui/src/public-api';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [DLSDInputComponent],
+  imports: [DLSDInputComponent, DLSDElementOptionShortcutsDirective],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
 })

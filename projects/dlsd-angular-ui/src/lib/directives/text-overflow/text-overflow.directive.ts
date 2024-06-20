@@ -10,7 +10,7 @@ import {
   runInInjectionContext,
   signal,
 } from '@angular/core';
-import { TooltipService } from '../../tooltip/tooltip-service/tooltip.service';
+import { TooltipService } from '../../view/tooltip/tooltip-service/tooltip.service';
 
 @Directive({
   selector: '[textsOverflow]',

@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@ngx-translate/core": "^15.0.0",
+    "angular-svg-icon": "^18.0.0",
     "deepmerge-ts": "^5.1.0",
     "lodash": "^4.17.21",
     "ng-let": "^17.0.4",

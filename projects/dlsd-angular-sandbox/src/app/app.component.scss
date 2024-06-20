@@ -35,10 +35,7 @@ nav {
     gap: 4px;
 
     dlsd-nav-item {
-      width: 100%;
-
       ::ng-deep li {
-        width: 100%;
         text-transform: capitalize;
         padding: 4px 8px;
         cursor: pointer;
@@ -52,6 +49,14 @@ nav {
           background: rgba(white, 0.5);
           color: black;
         }
+
+        &.expanded {
+          background: colors.$grayscale-2;
+        }
+      }
+
+      ::ng-deep ul {
+        border: 1px solid colors.$grayscale-3;
       }
     }
   }
@@ -64,7 +69,7 @@ main {
   flex-direction: column;
   overflow: auto;
 
-  .router {
+  &.router {
     padding: 16px;
   }
 }

@@ -1,4 +1,4 @@
-import { NgClass, NgComponentOutlet } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -24,12 +24,11 @@ enum View {
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
-    NgClass,
-    NgComponentOutlet,
     DLSDSwitchComponent,
     DLSDNavItemComponent,
     DLSDComponentsContainerComponent,
+    NgClass,
+    RouterOutlet,
     TranslateModule,
   ],
   templateUrl: './app.component.html',
