@@ -3,8 +3,8 @@ import { PaginationComponent } from './pagination.component';
 
 export const paginationRoutes: Routes = [
   {
-    title: 'pagination',
-    component: PaginationComponent,
+    title: 'Pagination',
     path: 'pagination',
+    component: PaginationComponent,
   },
 ];

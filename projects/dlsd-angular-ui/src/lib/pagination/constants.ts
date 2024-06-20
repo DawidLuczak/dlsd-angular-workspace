@@ -1,4 +1,4 @@
-import { DLSDOption } from '../dropdown/index';
+import { DLSDOption } from '../view/dropdown/index';
 
 export const PAGINATION_LIMIT_OPTIONS: DLSDOption<number>[] = [
   { name: '20', value: 20 },

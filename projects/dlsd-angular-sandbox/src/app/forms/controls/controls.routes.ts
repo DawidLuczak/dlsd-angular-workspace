@@ -4,14 +4,14 @@ import { FormControlsGroupComponent } from './form-controls-group/form-controls-
 
 export const controlsRoutes: Routes = [
   {
-    title: 'controls',
-    component: ControlsComponent,
+    title: 'Controls',
     path: 'controls',
+    component: ControlsComponent,
     children: [
       {
-        title: 'form controls group',
-        component: FormControlsGroupComponent,
+        title: 'Form controls group',
         path: 'form-controls-group',
+        component: FormControlsGroupComponent,
       },
     ],
   },

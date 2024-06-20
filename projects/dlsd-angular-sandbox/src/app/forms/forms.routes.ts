@@ -5,9 +5,9 @@ import { inputsRoutes } from './inputs/inputs.routes';
 
 export const formsRoutes: Routes = [
   {
-    title: 'forms',
-    component: FormsComponent,
+    title: 'Forms',
     path: 'forms',
+    component: FormsComponent,
     children: [...inputsRoutes, ...controlsRoutes],
   },
 ];

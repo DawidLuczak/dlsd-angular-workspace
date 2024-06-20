@@ -1,8 +1,7 @@
 <header>
   <dlsd-switch
     [label]="
-      I18N +
-        (view() === View.ROUTER_OUTLET ? '.view.router' : '.view.components')
+      I18N + (view() === View.ROUTER_OUTLET ? '.router' : '.components')
         | translate
     "
     [value]="view() === View.ROUTER_OUTLET"
@@ -26,7 +25,7 @@
   @if (view() === View.COMPONENT_OUTLETS) {
   <dlsd-components-container
     [routes]="routes()"
-    (scrollSectionChange)="activeRouteTree.set($event)"
+    (scrollSectionChange)="abc($event)"
   ></dlsd-components-container>
   } @else {
   <router-outlet></router-outlet>

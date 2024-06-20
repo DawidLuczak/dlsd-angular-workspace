@@ -37,14 +37,14 @@ import {
 } from 'rxjs';
 import { DLSDClearButtonComponent } from '../../../../buttons';
 import { DLSDTextsOverflowDirective } from '../../../../directives';
+import { I18N_NAMESPACE } from '../../../../internal/constants';
+import { caretSelectionPosition } from '../../../../internal/utilities/selection-position';
 import {
   DLSDDropdownDirective,
   DLSDDropdownOption,
   DLSDDropdownOptionsGroup,
-} from '../../../../dropdown';
-import { I18N_NAMESPACE } from '../../../../internal/constants';
-import { caretSelectionPosition } from '../../../../internal/utilities/selection-position';
-import { TooltipDirective } from '../../../../tooltip';
+} from '../../../../view/dropdown';
+import { TooltipDirective } from '../../../../view/tooltip';
 import { DLSDFormControlErrorComponent } from '../../../controls';
 import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels';

@@ -7,9 +7,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { DLSDCustomOverlayConfig } from '../../overlay/interfaces';
-import overlayPositions from '../../overlay/overlay-positions';
-import { DLSDOverlayService } from '../../overlay/overlay-service/overlay.service';
+import { DLSDCustomOverlayConfig } from '../../../overlay/interfaces';
+import overlayPositions from '../../../overlay/overlay-positions';
+import { DLSDOverlayService } from '../../../overlay/overlay-service/overlay.service';
 import { DLSDDropdownOverlayConfig } from '../dropdown-interfaces';
 
 @Injectable({

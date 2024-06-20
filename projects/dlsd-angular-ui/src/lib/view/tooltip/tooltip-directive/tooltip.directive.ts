@@ -5,7 +5,7 @@ import {
   ViewContainerRef,
   input,
 } from '@angular/core';
-import { OverlayPosition } from '../../overlay/overlay-positions';
+import { OverlayPosition } from '../../../overlay/overlay-positions';
 import { TooltipService } from '../tooltip-service/tooltip.service';
 import { TooltipContext } from '../tooltip-template/tooltip-template.component';
 

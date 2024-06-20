@@ -20,7 +20,7 @@ import {
 import { NgLetModule } from 'ng-let';
 import { take } from 'rxjs';
 
-import { DLSDDropdownService } from '../../../../dropdown';
+import { DLSDDropdownService } from '../../../../view/dropdown';
 import { DLSDFormControlErrorComponent } from '../../../controls';
 import { DLSDBaseFormControlComponent } from '../../../controls/base-form-control/base-form-control.component';
 import { DLSDInputLabelComponent } from '../../../labels/input-label/input-label.component';
