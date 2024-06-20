@@ -2,7 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DLSDCustomOverlayConfig } from '../overlay/interfaces';
+import { DLSDCustomOverlayConfig } from '../../overlay/interfaces';
 
 export interface DLSDDropdownConfig<T> extends DLSDCustomOverlayConfig {
   clearValue?: () => void;

@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, ViewContainerRef } from '@angular/core';
 import { BehaviorSubject, filter, fromEvent, takeUntil, timer } from 'rxjs';
-import overlayPositions from '../../overlay/overlay-positions';
-import { DLSDOverlayService } from '../../overlay/overlay-service/overlay.service';
+import overlayPositions from '../../../overlay/overlay-positions';
+import { DLSDOverlayService } from '../../../overlay/overlay-service/overlay.service';
 import {
   TOOLTIP_CONFIG,
   TooltipContext,

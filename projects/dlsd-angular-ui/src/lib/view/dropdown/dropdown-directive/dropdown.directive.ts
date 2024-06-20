@@ -20,7 +20,7 @@ import {
   race,
   take,
 } from 'rxjs';
-import { OverlayPosition } from '../../overlay/overlay-positions';
+import { OverlayPosition } from '../../../overlay/overlay-positions';
 import {
   DLSDDropdownConfig,
   DLSDDropdownOption,

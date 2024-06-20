@@ -28,7 +28,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { DLSDHighlightPipe } from '../../pipes/highlight/highlight.pipe';
+import { DLSDHighlightPipe } from '../../../pipes/highlight/highlight.pipe';
 import {
   DLSDDropdownConfig,
   DLSDDropdownOption,
