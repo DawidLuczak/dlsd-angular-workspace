@@ -65,11 +65,6 @@ nav {
 main {
   width: calc(100vw - var(--nav-width));
   grid-area: main;
-  display: flex;
-  flex-direction: column;
+  padding: 16px;
   overflow: auto;
-
-  &.router {
-    padding: 16px;
-  }
 }
