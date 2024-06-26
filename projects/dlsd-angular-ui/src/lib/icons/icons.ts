@@ -1,5 +1,6 @@
 export const ICONS = {
   action: {
+    close: [32],
     'edit-circle': [24],
   },
   arrow: {
