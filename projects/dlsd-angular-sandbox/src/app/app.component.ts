@@ -1,7 +1,8 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   signal,
   viewChild,
 } from '@angular/core';
@@ -29,6 +30,7 @@ enum View {
     DLSDNavItemComponent,
     DLSDComponentsContainerComponent,
     NgClass,
+    NgStyle,
     RouterOutlet,
     TranslateModule,
   ],
@@ -50,12 +52,10 @@ export class AppComponent {
     viewChild.required<DLSDComponentsContainerComponent>(
       DLSDComponentsContainerComponent
     );
+  private mainContainerRef =
+    viewChild.required<ElementRef<HTMLElement>>('mainContainerRef');
 
   constructor(private router: Router) {}
-
-  public abc(a: any): void {
-    console.log(a);
-  }
 
   protected changeView(flag: boolean): void {
     this.view.set(flag ? View.ROUTER_OUTLET : View.COMPONENT_OUTLETS);
@@ -67,7 +67,10 @@ export class AppComponent {
   protected navigateTo(activeRoute: DLSDActiveRoutesTree): void {
     this.activeRouteTree.set(activeRoute);
     this.view()
-      ? this.componentsContainerRef().changeSection(activeRoute)
+      ? this.componentsContainerRef().changeSection(
+          activeRoute,
+          this.mainContainerRef().nativeElement
+        )
       : this.navigateRouter(activeRoute);
   }
 

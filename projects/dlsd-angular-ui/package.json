@@ -1,6 +1,6 @@
 {
-  "name": "dsld-angular-ui",
-  "version": "1.0.0",
+  "name": "dlsd-angular-ui",
+  "version": "1.1.0",
   "peerDependencies": {
     "@angular/cdk": "^18.0.1",
     "@angular/common": "^18.0.0",

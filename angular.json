@@ -37,7 +37,10 @@
             "polyfills": [
               "zone.js",
               "zone.js/testing"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/dlsd-angular-ui/src/styles"]
+            }
           }
         }
       }

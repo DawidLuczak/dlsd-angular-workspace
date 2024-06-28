@@ -21,12 +21,9 @@
   </ul>
 </nav>
 
-<main [ngClass]="{ router: view() === View.ROUTER_OUTLET }">
+<main #mainContainerRef [ngClass]="{ router: view() === View.ROUTER_OUTLET }">
   @if (view() === View.COMPONENT_OUTLETS) {
-  <dlsd-components-container
-    [routes]="routes()"
-    (scrollSectionChange)="abc($event)"
-  ></dlsd-components-container>
+  <dlsd-components-container [routes]="routes()"></dlsd-components-container>
   } @else {
   <router-outlet></router-outlet>
   }

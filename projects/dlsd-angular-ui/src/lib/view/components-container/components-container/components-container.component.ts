@@ -26,11 +26,14 @@ export class DLSDComponentsContainerComponent {
 
   constructor(private elementRef: ElementRef) {}
 
-  public changeSection(routeTree: DLSDActiveRoutesTree): void {
+  public changeSection(
+    routeTree: DLSDActiveRoutesTree,
+    scrollableContainer: HTMLElement
+  ): void {
     const section = this.findSection(routeTree);
     if (!section) return;
 
-    this.elementRef.nativeElement.scrollTo({
+    scrollableContainer.scrollTo({
       top: section.offsetTop - this.SCROLL_PADDING,
       behavior: 'smooth',
     });
