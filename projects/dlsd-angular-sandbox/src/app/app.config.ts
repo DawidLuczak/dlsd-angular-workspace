@@ -7,10 +7,11 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { TitleStrategy, provideRouter } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { routes } from './app.routes';
+import { PageTitleStrategy } from './core/services/page-title-strategy.service';
 
 registerLocaleData(localePl);
 
@@ -35,6 +36,10 @@ export const appConfig: ApplicationConfig = {
         },
       })
     ),
+    {
+      provide: TitleStrategy,
+      useClass: PageTitleStrategy,
+    },
     {
       provide: LOCALE_ID,
       useValue: 'pl',

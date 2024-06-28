@@ -46,6 +46,10 @@ export class DLSDOverlayService {
     return this.overlay.scrollStrategies;
   }
 
+  public get position() {
+    return this.overlay.position();
+  }
+
   constructor(protected overlay: Overlay) {}
 
   public attachToOverlay<T>(componentPortal: ComponentPortal<T>): void {

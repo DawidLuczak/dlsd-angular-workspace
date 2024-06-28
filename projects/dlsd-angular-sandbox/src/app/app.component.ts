@@ -1,7 +1,8 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   signal,
   viewChild,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import {
   DLSDSwitchComponent,
 } from '../../../dlsd-angular-ui/src/lib';
 import { routes } from './app.routes';
+import { I18N_NAMESPACE } from './core/constants/app-constants';
 
 enum View {
   ROUTER_OUTLET,
@@ -28,6 +30,7 @@ enum View {
     DLSDNavItemComponent,
     DLSDComponentsContainerComponent,
     NgClass,
+    NgStyle,
     RouterOutlet,
     TranslateModule,
   ],
@@ -37,7 +40,7 @@ enum View {
 })
 export class AppComponent {
   protected readonly View = View;
-  protected readonly I18N = 'dlsdAngularSandbox';
+  protected readonly I18N = `${I18N_NAMESPACE}.view`;
 
   protected routes = signal(routes);
   protected activeRouteTree = signal<DLSDActiveRoutesTree>({
@@ -49,6 +52,8 @@ export class AppComponent {
     viewChild.required<DLSDComponentsContainerComponent>(
       DLSDComponentsContainerComponent
     );
+  private mainContainerRef =
+    viewChild.required<ElementRef<HTMLElement>>('mainContainerRef');
 
   constructor(private router: Router) {}
 
@@ -56,25 +61,32 @@ export class AppComponent {
     this.view.set(flag ? View.ROUTER_OUTLET : View.COMPONENT_OUTLETS);
     if (this.view() !== View.ROUTER_OUTLET) return;
 
-    this.router.navigate([`/${this.activeRouteTree().route.path}`]);
+    this.navigateRouter(this.activeRouteTree());
   }
 
   protected navigateTo(activeRoute: DLSDActiveRoutesTree): void {
-    this.view()
-      ? this.componentsContainerRef().changeSection(activeRoute.route)
-      : this.navigateRouter(activeRoute);
-
     this.activeRouteTree.set(activeRoute);
+    this.view()
+      ? this.componentsContainerRef().changeSection(
+          activeRoute,
+          this.mainContainerRef().nativeElement
+        )
+      : this.navigateRouter(activeRoute);
   }
 
   private navigateRouter(activeRoute: DLSDActiveRoutesTree): void {
-    let routeTree = activeRoute.routesTree;
-    let path = '/';
-    do {
-      path += `/${routeTree?.route.path}`;
-      routeTree = routeTree?.routesTree;
-    } while (routeTree);
+    const path = this.combineRoutePath(activeRoute);
+    this.router.navigate(path);
+  }
 
-    this.router.navigate([path]);
+  private combineRoutePath(activeRoute: DLSDActiveRoutesTree): string[] {
+    let routeTree = activeRoute.routesTree;
+    let path = [`${routeTree?.route.path ?? activeRoute.route.path}`];
+    while (routeTree?.routesTree?.route.path) {
+      path.push(routeTree.routesTree.route.path);
+      routeTree = routeTree.routesTree;
+    }
+
+    return path;
   }
 }

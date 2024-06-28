@@ -10,44 +10,44 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
 
 export const inputsRoutes: Routes = [
   {
-    title: 'inputs',
-    component: InputsComponent,
+    title: 'Inputs',
     path: 'inputs',
+    component: InputsComponent,
     children: [
       {
-        title: 'input',
-        component: InputComponent,
+        title: 'Input',
         path: 'input',
+        component: InputComponent,
       },
       {
-        title: 'select',
-        component: SelectComponent,
+        title: 'Select',
         path: 'select',
+        component: SelectComponent,
       },
       {
-        title: 'datepicker',
-        component: DatepickerComponent,
+        title: 'Datepicker',
         path: 'datepicker',
+        component: DatepickerComponent,
       },
       {
-        title: 'timepicker',
-        component: TimepickerComponent,
+        title: 'Timepicker',
         path: 'timepicker',
+        component: TimepickerComponent,
       },
       {
-        title: 'checkbox',
-        component: CheckboxComponent,
+        title: 'Checkbox',
         path: 'checkbox',
+        component: CheckboxComponent,
       },
       {
-        title: 'radio button',
-        component: RadioButtonComponent,
+        title: 'Radio button',
         path: 'radio-button',
+        component: RadioButtonComponent,
       },
       {
-        title: 'switch',
-        component: SwitchComponent,
+        title: 'Switch',
         path: 'switch',
+        component: SwitchComponent,
       },
     ],
   },

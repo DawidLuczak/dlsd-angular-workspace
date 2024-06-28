@@ -3,8 +3,8 @@ import { TabsComponent } from './tabs.component';
 
 export const tabsRoutes: Routes = [
   {
-    title: 'tabs',
-    component: TabsComponent,
+    title: 'Tabs',
     path: 'tabs',
+    component: TabsComponent,
   },
 ];

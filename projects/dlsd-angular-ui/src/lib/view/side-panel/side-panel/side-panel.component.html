@@ -1,0 +1,7 @@
+<dlsd-close-button (click)="config.close?.()"></dlsd-close-button>
+
+@if (config.component) {
+<ng-container *ngComponentOutlet="config.component"></ng-container>
+} @if (config.templateRef) {
+<ng-template [ngTemplateOutlet]="config.templateRef"></ng-template>
+}

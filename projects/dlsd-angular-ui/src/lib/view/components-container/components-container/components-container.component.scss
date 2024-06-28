@@ -1,8 +1,8 @@
 :host {
-  min-height: 100%;
   width: 100%;
-  padding: 16px;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 h2 {
@@ -10,15 +10,14 @@ h2 {
 }
 
 dlsd-components-container {
+  width: 100%;
   height: max-content;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden !important;
+  margin: 0 16px;
 }
 
 .separator {
   height: 1px;
   width: 100%;
   border-top: 1px solid rgba(gray, 0.5);
-  margin: 32px 0;
+  margin: 16px 0;
 }

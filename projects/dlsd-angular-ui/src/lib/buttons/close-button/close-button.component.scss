@@ -1,0 +1,19 @@
+@use "colors";
+
+:host {
+  border-radius: 50%;
+}
+
+button {
+  display: grid;
+  place-items: center;
+  background: colors.$grayscale-4;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 2px colors.$grayscale-1;
+  cursor: pointer;
+  transition: background 300ms ease;
+
+  &:hover {
+    background: colors.$grayscale-5;
+  }
+}
